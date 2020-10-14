@@ -25,7 +25,8 @@ def main():
     # iterate over columns
     for colname in df:
         col = df[colname]
-        has_nans = 'NaN' if col.isnull().values.any() else ''
+        isnull = col.isnull().values
+        has_nans = 'NaN ({})'.format(isnull.sum()) if isnull.any() else ''
         uniq_vals = col.nunique(dropna=True)
 
         min_ = col.min() if col.dtype.name != 'object' else '---'
@@ -33,7 +34,7 @@ def main():
 
         obj_vals = ','.join( list(set(col.dropna().values))[:10] ) if col.dtype.name == 'object' else ''
 
-        print('{:>30s} {:>8s} {:>3s} {:>8d} {:>8s} {:>8s} {}'.format(colname, col.dtype.name, has_nans, uniq_vals, str(min_), str(max_), obj_vals))
+        print('{:>30s} {:>8s} {:<12s} {:>8d} {:>8s} {:>8s} {}'.format(colname, col.dtype.name, has_nans, uniq_vals, str(min_), str(max_), obj_vals))
 
     return
 
