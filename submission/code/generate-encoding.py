@@ -68,15 +68,23 @@ def work(df, binsz_dict):
 
 
 def main(
-        ifname: ("Input CSV file", 'positional'),
         nrows : ('Number of rows to read, default(-1)=ALL', 'option', "R", int)=-1,
+        *ifnames: ("Input CSV files", 'positional'),
     ):
+
     with open('encoding-in.json') as ifile:
         binsz_dict = json.load(ifile)
 
         nrows = None if nrows == -1 else nrows
-        df = pd.read_csv(ifname, na_values='*******', nrows=nrows)
 
+        dfs = []
+
+        for ifname in ifnames:
+            df = pd.read_csv(ifname, na_values='*******', nrows=nrows)
+            df.drop(['target_ind'], inplace=True, errors='ignore')
+            dfs.append(df)
+
+        df = pd.concat(dfs, ignore_index=True)
         dictionary = work(df, binsz_dict)
         with open('encoding.json', "w", encoding="utf8") as ofile:
             json.dump(dictionary, ofile, indent=2)
