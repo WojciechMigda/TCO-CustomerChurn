@@ -8,6 +8,10 @@ The output is a json dictionary, with each ordinal column being paired with spec
 e.g.
 {'z_age': 10, 'z_census_household_1p_pct': 10, ...and so on}
 
+
+This is the first script to be run. With encoding-in.json present, either generated or hand-modified,
+the next step is to create proper encoding data, which specifies actual bin sizes and bin definitions.
+
 """
 
 import plac
