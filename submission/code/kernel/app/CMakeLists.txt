@@ -10,6 +10,7 @@ target_sources( ${APP} PRIVATE
   "src/train.cpp"
   "src/infer.cpp"
   "src/read_csv.cpp"
+  "src/parse_line.cpp"
 )
 
 include_directories( "src" )

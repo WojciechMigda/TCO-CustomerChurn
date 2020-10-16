@@ -1,7 +1,13 @@
 __pycache__/
+
 *.7z
 history.csv
 input.csv
 ground_truth.json
 competitor_pack/
+
 .build/
+
+.settings/
+.cproject
+.project

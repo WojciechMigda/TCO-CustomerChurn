@@ -13,5 +13,5 @@ void train(
     model_params_t const & model_params)
 {
     //auto const [cat_vec, num_vec] =
-        read_csv(csv_ifname);
+        read_csv(csv_ifname, false);
 }
