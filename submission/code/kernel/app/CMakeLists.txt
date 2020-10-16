@@ -20,3 +20,5 @@ include_directories(
   "$<TARGET_PROPERTY:json,MY_INCLUDE_DIRS>" )
 include_directories(
   "$<TARGET_PROPERTY:fmt,MY_INCLUDE_DIRS>" )
+include_directories(
+  "$<TARGET_PROPERTY:dbg,MY_INCLUDE_DIRS>" )
