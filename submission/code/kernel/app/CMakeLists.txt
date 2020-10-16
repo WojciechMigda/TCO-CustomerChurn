@@ -7,6 +7,9 @@ set(APP main)
 add_executable( ${APP} "src/dummy.cpp" )
 target_sources( ${APP} PRIVATE
   "src/main.cpp"
+  "src/train.cpp"
+  "src/infer.cpp"
+  "src/read_csv.cpp"
 )
 
 include_directories( "src" )
