@@ -104,9 +104,9 @@ bool parse_line(
     auto fsave = [&](auto & ctx){ vals.push_back(_attr(ctx)); };
     auto ssave = [&](auto & ctx){ cats.push_back(_attr(ctx)); };
 
-    auto str = *(char_ - ',');
-
     char const MISSING[] = "*******";
+
+    auto const str = *(char_ - ',');
 
     auto const maybe_int = (MISSING | int_[fsave]);
     auto const maybe_int_and = maybe_int >> ',';
