@@ -2,6 +2,7 @@
 #include "infer.hpp"
 #include "train.hpp"
 
+#include "spdlog/spdlog.h"
 #include "clipp.hpp"
 
 #include <iostream>
@@ -63,8 +64,8 @@ int main(int argc, char **argv)
         clipp::option("--infer").set(do_infer).doc("Request inference instead of training"),
 
         clipp::option("--model", "-m").doc("Pre-trained input model to load") & clipp::value("JSON-ized model file to read from", model_ifname),
-        clipp::option("--datafile", "-d").doc("Input CSV file for training or inference") & clipp::value("CSV data file to read from", csv_ifname),
-        clipp::option("--encoding", "-e").doc("Input JSON file with input encoding parameters") & clipp::value("JSON encoding file to read from", encoder_ifname),
+        clipp::required("--datafile", "-d").doc("Input CSV file for training or inference") & clipp::value("CSV data file to read from", csv_ifname),
+        clipp::required("--encoding", "-e").doc("Input JSON file with input encoding parameters") & clipp::value("JSON encoding file to read from", encoder_ifname),
 
         clipp::option("--tsetlini-s", "-s").doc("Specificity parameter for the Tsetlini model") & clipp::value("s=" + std::to_string(ts_s), ts_s),
         clipp::option("--tsetlini-clauses", "-C").doc("Number of clauses parameter for the Tsetlini model") & clipp::value(is_natural(), "clauses=" + std::to_string(ts_clauses), ts_clauses),
@@ -82,12 +83,18 @@ int main(int argc, char **argv)
     }
     else
     {
+        spdlog::info("Start");
+
         if (do_infer)
         {
+            spdlog::info("Inference");
+
             infer(csv_ifname, encoder_ifname, model_ifname);
         }
         else
         {
+            spdlog::info("Training");
+
             model_params_t const model_params{
                 {"s", ts_s},
                 {"clauses", ts_clauses},
