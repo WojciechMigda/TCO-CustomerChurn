@@ -8,6 +8,7 @@
 #include <string>
 #include <utility>
 #include <array>
+#include <cmath>
 
 
 std::vector<std::string> extract_cust_id(std::vector<std::vector<std::string>> & cat_rows)
@@ -42,10 +43,53 @@ std::vector<int> extract_target(std::vector<std::vector<float>> & num_rows)
 }
 
 
-unsigned int bin_ordinal(float x, std::vector<float> const & bin_edges)
+template<typename Iterator>
+unsigned int digitize(float const v, Iterator first, Iterator last)
 {
-    // TODO
-    return 0;
+    // from
+    //  https://github.com/numpy/numpy/blob/v1.19.0/numpy/lib/function_base.py#L4678-L4786
+    //  https://github.com/numpy/numpy/blob/v1.19.0/numpy/core/fromnumeric.py#L1276-L1343
+
+    /*
+     * numpy.searchsorted:
+     * ===================
+     * side     returned index i satisfies
+     * ----     --------------------------
+     * left     a[i-1] < v <= a[i]
+     * right    a[i-1] <= v < a[i]
+     *
+      *================
+     * KBinsDiscretizer calls np.digitize(Xt[:, jj] + eps, bin_edges[jj][1:]) with default `right=False`
+     *
+     * This leads to a call to searchsorted with `side=right` (https://github.com/numpy/numpy/blob/v1.19.0/numpy/lib/function_base.py#L4781)
+     */
+
+    auto const it = std::find_if(first, last, [v](float a){ return v < a;});
+
+    auto rv = std::distance(first, it);
+
+    return rv;
+}
+
+
+unsigned int bin_ordinal(float const x, std::vector<float> const & bin_edges)
+{
+    /*
+     * From sklearn github:
+     *
+     * # Values which are close to a bin edge are susceptible to numeric
+     * # instability. Add eps to X so these values are binned correctly
+     * # with respect to their decimal truncation. See documentation of
+     * # numpy.isclose for an explanation of ``rtol`` and ``atol``.
+     */
+    static auto constexpr rtol = 1.e-5;
+    static auto constexpr atol = 1.e-8;
+
+    auto const eps = atol + rtol * std::abs(x);
+
+    auto rv = digitize(x + eps, std::next(bin_edges.cbegin()), bin_edges.cend());
+
+    return std::clamp<unsigned int>(rv, 0, bin_edges.size() - 2);
 }
 
 
@@ -62,7 +106,7 @@ unsigned int total_kbd_bits(nlohmann::json const & encoding)
      *
      * n_bins_ = 11
      *
-     * min/max = 0 / 10
+     * min <--> max = 0 <--> 10
      *
      * So, for a bin_edges of size N it corresponds to N-1 bins, and yields
      * ordinals between 0 and N-2.
@@ -164,7 +208,8 @@ std::vector<Tsetlini::bit_vector_uint64> encode_features(
         cpos += encode_cat(cpos, cat_prod_monodual, cat_row[Cat::prod_monodual_cd], bv);
         cpos += encode_cat(cpos, cat_customer_value, cat_row[Cat::customer_value_cd], bv);
 
-        (void)num_row;
+        auto foo = bin_ordinal(num_row[Num::z_mobile_voice_cat1_cnt], encoding["z_mobile_voice_cat1_cnt"]);
+        (void)foo;
 
         df.push_back(std::move(bv));
 
