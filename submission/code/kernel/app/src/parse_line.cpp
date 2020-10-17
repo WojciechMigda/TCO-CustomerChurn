@@ -2,6 +2,11 @@
 
 #include <string>
 #include <vector>
+#include <utility>
+#include <iterator>
+#include <cstddef>
+#include <cmath>
+
 
 #if 0
 report_period_m_cd,md5_cust_party_key,province_cd,z_age,Gender_CD,z_census_household_1p_pct,z_census_education_high_pct,z_census_purchase_household,z_census_purchase_capita,z_census_household_cnt,prod_monodual_cd,multiplay_cnt,z_line_cnt,z_sim_cnt,fixed_prod_cat1_ind,tenure_fixed_month,tenure_mobile_month,z_line_voice_cat1_cnt,fixed_data_cat1_ind,fixed_data_cat2_ind,z_fixed_prod_cat2_cnt,z_fixed_prod_cat1_cnt,z_fixed_data_cat3_cnt,fixed_prod_cat3_cnt,device_smartphone_cnt,z_mobile_voice_cat1_cnt,z_mobile_data_cat1_cnt,mobile_data_cat2_cnt,z_mobile_voice_cat3_cnt,z_mobile_data_cat3_cnt,z_usg_fv_3m_avg,z_usg_fd_mb_1m_sum,z_usg_fd_mb_3m_avg,z_usg_mv_ib_a_3m_avg,z_usg_md_sms_ib_a_3m_avg,z_usg_md_ib_mb_3m_avg,payment_method_cash_cnt,customer_value_cd,z_rev_1m_sum,z_device_netcube_cnt,z_tariff_netcube_cnt,z_min_Prog_Max_BB_Down,z_line_Fib2h_CNT,z_min_Speed_Product_KBit,z_Max_Speed_Missing_KBit,z_Min_Speed_Reserve_KBit,z_Max_DSL_OOS_PCT,z_PR_Relocation_CNT,z_PR_Relocation_Days,z_PR_ActivationSupportOpt_CNT,z_PR_ActivationSupportOpt_Days,z_PR_DeactivationThreat_CNT,z_PR_DeactivationSupport_CNT,z_PR_DeactivationProdOpt_CNT,z_PR_DeactivationProdOpt_Days,z_PR_OtherWOTopic_CNT,z_PR_OtherWOTopic_Days,z_PR_AddressChange_CNT,z_PR_AddressChange_Days,z_PR_ServiceDisruption_CNT,z_PR_ServiceDisruption_Days,z_PR_BasketSupport_CNT,z_PR_BasketSupport_Days,z_PR_SellingSalesSupport_CNT,z_PR_SellingSalesSupport_Days,z_PR_DigitalUsage_CNT,z_PR_DigitalUsage_Days,z_TNPS_Last_Days,z_TNPS_Score_Avg,target_ind
@@ -82,8 +87,7 @@ z_PR_ActivationSupportOpt_Days  float64                   365  -0.2652   6.0011
 #endif
 
 
-bool parse_line(
-    bool const for_inference, // TODO ?
+std::pair<bool, std::size_t> parse_line(
     std::vector<std::string> & cats,
     std::vector<float> & vals,
     std::string const & line
@@ -91,6 +95,8 @@ bool parse_line(
 {
     namespace x3 = boost::spirit::x3;
     namespace ascii = boost::spirit::x3::ascii;
+    using x3::lit;
+    using x3::eps;
     using x3::float_;
     using x3::int_;
     using x3::char_;
@@ -102,19 +108,26 @@ bool parse_line(
 
 
     auto fsave = [&](auto & ctx){ vals.push_back(_attr(ctx)); };
-    auto ssave = [&](auto & ctx){ cats.push_back(_attr(ctx)); };
+    auto fsave_null = [&](auto & ctx){ vals.push_back(NAN); };
 
-    char const MISSING[] = "*******";
+    auto ssave = [&](auto & ctx){ cats.push_back(_attr(ctx)); };
+    auto ssave_null = [&](auto & ctx){ cats.push_back(std::string()); };
+
+
+    auto const MISSING = lit("*******");
 
     auto const str = *(char_ - ',');
 
-    auto const maybe_int = (MISSING | int_[fsave]);
+    /*
+     *  eps[fsave_null] is to handle case of an empty entry, like in ',,'
+     */
+    auto const maybe_int = (MISSING[fsave_null] | int_[fsave] | eps[fsave_null]);
     auto const maybe_int_and = maybe_int >> ',';
 
-    auto const maybe_str = (MISSING | str[ssave]);
+    auto const maybe_str = (MISSING[ssave_null] | str[ssave]);
     auto const maybe_str_and = maybe_str >> ',';
 
-    auto const maybe_float = (MISSING | float_[fsave]);
+    auto const maybe_float = (MISSING[fsave_null] | float_[fsave] | eps[fsave_null]);
     auto const maybe_float_and = maybe_float >> ',';
 
     bool rv = phrase_parse(
@@ -190,14 +203,15 @@ bool parse_line(
             >> maybe_float_and          //         z_PR_DigitalUsage_CNT  float64 NaN
             >> maybe_float_and          //        z_PR_DigitalUsage_Days  float64
             >> maybe_float_and          //              z_TNPS_Last_Days  float64
-            >> maybe_float_and          //              z_TNPS_Score_Avg  float64
+            >> maybe_float              //              z_TNPS_Score_Avg  float64
+
             // optional
-            >> +maybe_int               //                    target_ind    int64
+            >> -(',' >> int_[fsave])    //                    target_ind    int64
         )
         ,
         //  End grammar
 
         space);
 
-    return rv;
+    return {rv, std::distance(line.c_str(), first)};
 }

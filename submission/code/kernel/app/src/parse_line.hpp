@@ -5,10 +5,11 @@
 
 #include <string>
 #include <vector>
+#include <utility>
+#include <cstddef>
 
 
-bool parse_line(
-    bool const for_inference,
+std::pair<bool, std::size_t> parse_line(
     std::vector<std::string> & cats,
     std::vector<float> & vals,
     std::string const & line

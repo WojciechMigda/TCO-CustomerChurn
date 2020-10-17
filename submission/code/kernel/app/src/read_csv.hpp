@@ -8,7 +8,7 @@
 #include <utility>
 
 
-std::pair<std::vector<std::string>, std::vector<float>> read_csv(std::string const & ifname, bool const inference);
+std::pair<std::vector<std::string>, std::vector<float>> read_csv(std::string const & ifname);
 
 
 #endif /* APP_SRC_READ_CSV_HPP_ */
