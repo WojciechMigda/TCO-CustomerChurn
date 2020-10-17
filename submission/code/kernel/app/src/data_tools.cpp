@@ -2,6 +2,7 @@
 
 #include "tsetlini/tsetlini_types.hpp"
 #include "json/json.hpp"
+#include "spdlog/spdlog.h"
 
 #include <vector>
 #include <string>
@@ -46,6 +47,16 @@ std::vector<Tsetlini::bit_matrix_uint64> encode_features(
     nlohmann::json const & encoding
 )
 {
+//    spdlog::info("enc {}", encoding.size());
+//
+//    for (auto it : encoding.items())
+//    {
+//        if (it.value().is_null())
+//        {
+//            spdlog::info("k {}", it.key());
+//        }
+//    }
+
     std::vector<Tsetlini::bit_matrix_uint64> bm;
 
     return bm;
