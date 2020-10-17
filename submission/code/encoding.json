@@ -110,6 +110,11 @@
     8.4975,
     9.5165
   ],
+  "fixed_prod_cat1_ind": [
+    0.0,
+    0.5,
+    1.0
+  ],
   "tenure_fixed_month": [
     0.0,
     16.0,
@@ -135,6 +140,16 @@
     319.0
   ],
   "z_line_voice_cat1_cnt": null,
+  "fixed_data_cat1_ind": [
+    0.0,
+    0.5,
+    1.0
+  ],
+  "fixed_data_cat2_ind": [
+    0.0,
+    0.5,
+    1.0
+  ],
   "z_fixed_prod_cat2_cnt": [
     -1.0954,
     0.5386333333333333,

@@ -8,6 +8,9 @@ The output is a json dictionary, with each ordinal column being paired with resp
 Exceptions are columns which are to be skipped, e.g. because they have just 1 value, and they will
 be assigned null output.
 
+Example execution:
+./generate-encoding.py ../../data/input.csv ../../data/history.csv
+
 """
 
 import plac

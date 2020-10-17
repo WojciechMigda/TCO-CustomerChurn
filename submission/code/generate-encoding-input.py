@@ -24,9 +24,6 @@ import json
                    province_cd   object NaN        9      ---      --- G,D,E,B,H,A,C,F,I
                      Gender_CD   object NaN        2      ---      --- F,M
               prod_monodual_cd   object            2      ---      --- F,D
-           fixed_prod_cat1_ind    int64            2        0        1 
-           fixed_data_cat1_ind    int64            2        0        1 
-           fixed_data_cat2_ind    int64            2        0        1 
              customer_value_cd   object NaN        5      ---      --- HIGHEST,HIGH,MEDIUM,NEW,LOW
 
                     target_ind    int64            2        0        1 
@@ -41,9 +38,12 @@ Full TRAIN shape: (6421184, 70)
                  multiplay_cnt    int64            5        1        5 
                     z_line_cnt  float64 NaN        3  -0.1555    9.009 
                      z_sim_cnt  float64 NaN       10  -0.6735   9.5165 
+           fixed_prod_cat1_ind    int64            2        0        1 
             tenure_fixed_month    int64          424        0      426 
            tenure_mobile_month    int64          316        0      315 
          z_line_voice_cat1_cnt  float64 NaN        1  -0.0658  -0.0658 
+           fixed_data_cat1_ind    int64            2        0        1 
+           fixed_data_cat2_ind    int64            2        0        1 
          z_fixed_prod_cat2_cnt  float64 NaN        6  -1.0954   8.7088 
          z_fixed_prod_cat1_cnt  float64 NaN        2   -0.159   6.2408 
          z_fixed_data_cat3_cnt  float64 NaN        3  -0.2875   7.1015 
@@ -110,9 +110,12 @@ def main(bin_size : ('Bin size in bits', 'option', "W", int)=10):
                  multiplay_cnt
                     z_line_cnt
                      z_sim_cnt
+           fixed_prod_cat1_ind
             tenure_fixed_month
            tenure_mobile_month
          z_line_voice_cat1_cnt
+           fixed_data_cat1_ind
+           fixed_data_cat2_ind
          z_fixed_prod_cat2_cnt
          z_fixed_prod_cat1_cnt
          z_fixed_data_cat3_cnt
