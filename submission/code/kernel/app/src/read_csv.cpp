@@ -8,7 +8,10 @@
 #include <fstream>
 
 
-std::pair<std::vector<std::string>, std::vector<float>> read_csv(std::string const & ifname)
+std::pair<
+    std::vector<std::vector<std::string>>,
+    std::vector<std::vector<float>>>
+read_csv(std::string const & ifname)
 {
     std::ifstream fcsv(ifname);
 
@@ -22,7 +25,7 @@ std::pair<std::vector<std::string>, std::vector<float>> read_csv(std::string con
             std::vector<float> nums;
 
             // reserve empirically determined number of elements
-            cats.reserve(4);
+            cats.reserve(5);
             nums.reserve(65);
 
             auto const [ok, pos] = parse_line(cats, nums, line);

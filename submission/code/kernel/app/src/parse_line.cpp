@@ -136,7 +136,7 @@ std::pair<bool, std::size_t> parse_line(
         //  Begin grammar
         (
                maybe_int_and            //            report_period_m_cd    int64
-            >> str >> ','               //            md5_cust_party_key   object
+            >> str[ssave] >> ','        //            md5_cust_party_key   object
             >> maybe_str_and            //                   province_cd   object NaN
             >> maybe_float_and          //                         z_age  float64 NaN
             >> maybe_str_and            //                     Gender_CD   object NaN
