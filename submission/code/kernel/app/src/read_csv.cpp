@@ -17,6 +17,9 @@ read_csv(std::string const & ifname)
 
     std::string line;
 
+    std::vector<std::vector<std::string>> cat_rows;
+    std::vector<std::vector<float>> num_rows;
+
     if (std::getline(fcsv, line)) // header
     {
         while (std::getline(fcsv, line))
@@ -36,6 +39,8 @@ read_csv(std::string const & ifname)
                 break;
             }
 
+            cat_rows.push_back(cats);
+            num_rows.push_back(nums);
 //            spdlog::info("CSV: Read {} features ({} categorical and {} numerical)",
 //                cats.size() + nums.size(), cats.size(), nums.size());
         }
@@ -45,5 +50,5 @@ read_csv(std::string const & ifname)
         spdlog::error("Missing header line in read CSV file {}", ifname);
     }
 
-    return {};
+    return {cat_rows, num_rows};
 }
