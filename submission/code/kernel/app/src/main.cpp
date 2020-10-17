@@ -6,6 +6,7 @@
 #include "clipp.hpp"
 
 #include <iostream>
+#include <fstream>
 
 
 struct is_natural
@@ -48,6 +49,21 @@ struct is_nonnegative
 };
 
 
+bool bad_filename(std::string const & fname)
+{
+    std::ifstream f(fname);
+
+    bool ok = f.is_open();
+
+    if (not ok)
+    {
+        spdlog::error("Cannot open file {}", fname);
+    }
+
+    return not ok;
+}
+
+
 int main(int argc, char **argv)
 {
     float ts_s = 4.0;
@@ -60,12 +76,19 @@ int main(int argc, char **argv)
     std::string encoder_ifname;
     bool do_infer = false;
 
-    auto cli = (
-        clipp::option("--infer").set(do_infer).doc("Request inference instead of training"),
 
-        clipp::option("--model", "-m").doc("Pre-trained input model to load") & clipp::value("JSON-ized model file to read from", model_ifname),
+    auto inference = (
+        clipp::command("infer").set(do_infer, true).doc("Request inference using existing model"),
         clipp::required("--datafile", "-d").doc("Input CSV file for training or inference") & clipp::value("CSV data file to read from", csv_ifname),
         clipp::required("--encoding", "-e").doc("Input JSON file with input encoding parameters") & clipp::value("JSON encoding file to read from", encoder_ifname),
+        clipp::required("--model", "-m").doc("Pre-trained input model to load") & clipp::value("JSON-ized model file to read from", model_ifname)
+    );
+
+    auto training = (
+        clipp::command("train").set(do_infer, false).doc("Request model training / augmenting"),
+        clipp::required("--datafile", "-d").doc("Input CSV file for training or inference") & clipp::value("CSV data file to read from", csv_ifname),
+        clipp::required("--encoding", "-e").doc("Input JSON file with input encoding parameters") & clipp::value("JSON encoding file to read from", encoder_ifname),
+        clipp::option("--model", "-m").doc("Pre-trained input model to load") & clipp::value("JSON-ized model file to read from", model_ifname),
 
         clipp::option("--tsetlini-s", "-s").doc("Specificity parameter for the Tsetlini model") & clipp::value("s=" + std::to_string(ts_s), ts_s),
         clipp::option("--tsetlini-clauses", "-C").doc("Number of clauses parameter for the Tsetlini model") & clipp::value(is_natural(), "clauses=" + std::to_string(ts_clauses), ts_clauses),
@@ -76,6 +99,8 @@ int main(int argc, char **argv)
         clipp::option("--tsetlini-max-weight", "-w").doc("Max weight parameter for the Tsetlini model") & clipp::value(is_natural(), "max_weight=" + std::to_string(ts_max_weight), ts_max_weight),
         clipp::option("--tsetlini-jobs", "-j").doc("Number of jobs parameter for the Tsetlini model") & clipp::value("jobs=" + std::to_string(ts_njobs), ts_njobs)
     );
+
+    auto cli = (inference | training);
 
     if (not clipp::parse(argc, argv, cli))
     {
@@ -89,11 +114,24 @@ int main(int argc, char **argv)
         {
             spdlog::info("Inference");
 
+            if (bad_filename(csv_ifname)
+                or bad_filename(encoder_ifname)
+                or bad_filename(model_ifname))
+            {
+                std::exit(1);
+            }
+
             infer(csv_ifname, encoder_ifname, model_ifname);
         }
         else
         {
             spdlog::info("Training");
+
+            if (bad_filename(csv_ifname)
+                or bad_filename(encoder_ifname))
+            {
+                std::exit(1);
+            }
 
             model_params_t const model_params{
                 {"s", ts_s},
