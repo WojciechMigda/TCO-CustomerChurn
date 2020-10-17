@@ -36,6 +36,9 @@ read_csv(std::string const & ifname)
             if (not ok)
             {
                 spdlog::error("CSV: Parsing failed for line {} at position {}", line, pos);
+
+                cat_rows.clear();
+                num_rows.clear();
                 break;
             }
 
