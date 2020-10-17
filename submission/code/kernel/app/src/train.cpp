@@ -1,5 +1,6 @@
 #include "model_params.hpp"
 #include "read_csv.hpp"
+#include "columns.hpp"
 
 #include "json/json.hpp"
 #include "spdlog/spdlog.h"
@@ -18,12 +19,4 @@ void train(
     spdlog::info("CSV: read {} rows with categorical features and {} rows with numerical ones.",
         cat_rows.size(), num_rows.size());
 
-    /*
-     * cat_rows:
-     *      md5_cust_party_key
-     *      province_cd
-     *      Gender_CD
-     *      prod_monodual_cd
-     *      customer_value_cd
-     */
 }
