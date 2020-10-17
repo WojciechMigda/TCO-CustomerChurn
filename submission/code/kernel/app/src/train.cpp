@@ -1,6 +1,7 @@
 #include "model_params.hpp"
 #include "read_csv.hpp"
 #include "columns.hpp"
+#include "data_tools.hpp"
 
 #include "json/json.hpp"
 #include "spdlog/spdlog.h"
@@ -18,5 +19,7 @@ void train(
 
     spdlog::info("CSV: read {} rows with categorical features and {} rows with numerical ones.",
         cat_rows.size(), num_rows.size());
+
+    auto const target = extract_target(num_rows);
 
 }

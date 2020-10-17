@@ -4,7 +4,7 @@
 #define APP_SRC_COLUMNS_HPP_
 
 
-enum class Cat
+enum Cat
 {
     md5_cust_party_key,
            province_cd,
@@ -13,7 +13,7 @@ enum class Cat
      customer_value_cd
 };
 
-enum class Num
+enum Num
 {
             report_period_m_cd,
                          z_age,
