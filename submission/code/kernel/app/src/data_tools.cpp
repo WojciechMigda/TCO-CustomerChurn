@@ -172,6 +172,65 @@ unsigned int encode_cat(
 }
 
 
+unsigned int encode_num(
+    unsigned int const pos,
+    std::string const & name,
+    nlohmann::json const & desc,
+    std::vector<float> const & num_rows,
+    Tsetlini::bit_vector_uint64 & bv)
+{
+    unsigned int rv = 0;
+
+    if (not desc.is_null())
+    {
+        rv = desc.size() - 1;
+
+        auto const maybe_enum = Num_from_string(name);
+
+        if (maybe_enum.has_value())
+        {
+            auto const feature_idx = maybe_enum.value();
+            auto const val = num_rows[feature_idx];
+
+            if (std::isnan(val))
+            {
+                // set the NaN bit
+                bv.set(rv);
+            }
+            else
+            {
+                auto const to_set = bin_ordinal(val, desc);
+
+                for (auto it = 0u; it < to_set; ++it)
+                {
+                    bv.set(pos + it);
+                }
+            }
+        }
+        else
+        {
+            spdlog::warn("Encoding specification has unknown numerical feature {}", name);
+        }
+    }
+
+    return rv;
+}
+
+
+unsigned int encode_month(
+    unsigned int const pos,
+    float const f_report_period,
+    Tsetlini::bit_vector_uint64 & bv)
+{
+    unsigned int report_period = std::round(f_report_period);
+    unsigned int month = report_period % 13;
+
+    bv.set(pos + month - 1);
+
+    return 12;
+}
+
+
 std::vector<Tsetlini::bit_vector_uint64> encode_features(
     std::vector<std::vector<std::string>> & cat_rows,
     std::vector<std::vector<float>> & num_rows,
@@ -208,8 +267,19 @@ std::vector<Tsetlini::bit_vector_uint64> encode_features(
         cpos += encode_cat(cpos, cat_prod_monodual, cat_row[Cat::prod_monodual_cd], bv);
         cpos += encode_cat(cpos, cat_customer_value, cat_row[Cat::customer_value_cd], bv);
 
-        auto foo = bin_ordinal(num_row[Num::z_mobile_voice_cat1_cnt], encoding["z_mobile_voice_cat1_cnt"]);
-        (void)foo;
+        for (auto const it : encoding.items())
+        {
+            cpos += encode_num(cpos, it.key(), it.value(), num_row, bv);
+        }
+
+        cpos += encode_month(cpos, num_row[Num::report_period_m_cd], bv);
+
+        // encoding ends here
+
+        if (cpos != NCOLS)
+        {
+            spdlog::warn("Encoding resulted in mismatch between number of encoded bits {} and bit vector size {}", cpos, bv.size());
+        }
 
         df.push_back(std::move(bv));
 

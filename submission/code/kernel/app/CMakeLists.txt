@@ -15,6 +15,7 @@ target_sources( ${APP} PRIVATE
   "src/parse_line.cpp"
   "src/data_tools.cpp"
   "src/json_io.cpp"
+  "src/columns.cpp"
 )
 
 include_directories( "src" )
