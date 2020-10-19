@@ -12,6 +12,7 @@ void train(
     std::string const & csv_ifname,
     std::string const & encoder_ifname,
     std::string const & model_ifname,
+    std::string const & model_ofname,
     model_params_t const & model_params);
 
 

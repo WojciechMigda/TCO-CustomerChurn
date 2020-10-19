@@ -49,7 +49,7 @@ struct is_nonnegative
 };
 
 
-bool bad_filename(std::string const & fname)
+bool bad_filename_r(std::string const & fname)
 {
     std::ifstream f(fname);
 
@@ -58,6 +58,21 @@ bool bad_filename(std::string const & fname)
     if (not ok)
     {
         spdlog::error("Cannot open file {}", fname);
+    }
+
+    return not ok;
+}
+
+
+bool bad_filename_w(std::string const & fname)
+{
+    std::ofstream f(fname, std::ios::app);
+
+    bool ok = f.is_open();
+
+    if (not ok)
+    {
+        spdlog::error("Cannot open file for writing {}", fname);
     }
 
     return not ok;
@@ -74,6 +89,7 @@ int main(int argc, char **argv)
     bool boost_tpf = true;
     unsigned int nepochs = 20u;
     std::string model_ifname;
+    std::string model_ofname;
     std::string csv_ifname;
     std::string encoder_ifname;
     bool do_infer = false;
@@ -91,6 +107,7 @@ int main(int argc, char **argv)
         clipp::required("--datafile", "-d").doc("Input CSV file for training or inference") & clipp::value("CSV data file to read from", csv_ifname),
         clipp::required("--encoding", "-e").doc("Input JSON file with input encoding parameters") & clipp::value("JSON encoding file to read from", encoder_ifname),
         clipp::option("--model", "-m").doc("Pre-trained input model to load") & clipp::value("JSON-ized model file to read from", model_ifname),
+        clipp::required("--output-model", "-o").doc("Output file to save the trained model") & clipp::value("JSON-ized model file to save to", model_ofname),
 
         clipp::option("--tsetlini-threshold", "-T").doc("Threshold parameter for the Tsetlini model") & clipp::value(is_natural(), "threshold=" + std::to_string(ts_threshold), ts_threshold),
         clipp::option("--tsetlini-s", "-s").doc("Specificity parameter for the Tsetlini model") & clipp::value("s=" + std::to_string(ts_s), ts_s),
@@ -118,9 +135,9 @@ int main(int argc, char **argv)
         {
             spdlog::info("Inference");
 
-            if (bad_filename(csv_ifname)
-                or bad_filename(encoder_ifname)
-                or bad_filename(model_ifname))
+            if (bad_filename_r(csv_ifname)
+                or bad_filename_r(encoder_ifname)
+                or bad_filename_r(model_ifname))
             {
                 std::exit(1);
             }
@@ -131,8 +148,9 @@ int main(int argc, char **argv)
         {
             spdlog::info("Training");
 
-            if (bad_filename(csv_ifname)
-                or bad_filename(encoder_ifname))
+            if (bad_filename_r(csv_ifname)
+                or bad_filename_r(encoder_ifname)
+                or bad_filename_w(model_ofname))
             {
                 std::exit(1);
             }
@@ -147,7 +165,7 @@ int main(int argc, char **argv)
                 {"n_jobs", ts_njobs}
             };
 
-            train(csv_ifname, encoder_ifname, model_ifname, model_params);
+            train(csv_ifname, encoder_ifname, model_ifname, model_ofname, model_params);
         }
     }
 

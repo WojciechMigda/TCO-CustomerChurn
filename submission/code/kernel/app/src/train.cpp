@@ -9,9 +9,11 @@
 
 #include "tsetlini/tsetlini_status_code.hpp"
 #include "tsetlini/tsetlini.hpp"
+#include "tsetlini/tsetlini_state_json.hpp"
 
 #include <string>
 #include <cstdlib>
+#include <fstream>
 
 
 auto error_printer = [](Tsetlini::status_message_t && msg)
@@ -77,6 +79,7 @@ void train(
     std::string const & csv_ifname,
     std::string const & encoder_ifname,
     std::string const & model_ifname,
+    std::string const & model_ofname,
     model_params_t const & model_params)
 {
     auto encoding = read_json(encoder_ifname);
@@ -140,11 +143,24 @@ void train(
             spdlog::stopwatch sw;
             spdlog::info("Partial fit initiated for {} epoch(s).", NEPOCHS);
 
-            auto ok = clf.partial_fit(X_train, target, 2, NEPOCHS);
+            auto status = clf.partial_fit(X_train, target, 2, NEPOCHS);
 
             spdlog::info("Partial fit completed in {:.1f} secs.", sw);
 
+            if (status.first == Tsetlini::S_OK)
+            {
+                std::string const js_state = Tsetlini::to_json_string(clf.read_state());
+
+                std::ofstream ofile(model_ofname);
+
+                ofile << js_state;
+                ofile.close();
+            }
+            else
+            {
+                spdlog::error("Partial fit completed with an error: {}", status.first);
+            }
+
             return clf;
         });
-
 }
