@@ -16,6 +16,7 @@
 #include <fstream>
 
 
+static
 auto error_printer = [](Tsetlini::status_message_t && msg)
 {
     spdlog::error("{}", msg.second);
@@ -137,6 +138,7 @@ void train(
             if (not model_ifname.empty())
             {
                 // restore model from file
+                spdlog::warn("Not implemented");
             }
 
             auto const NEPOCHS = params::nepochs(model_params);
@@ -155,6 +157,8 @@ void train(
 
                 ofile << js_state;
                 ofile.close();
+
+                spdlog::info("Model saved into {}", model_ofname);
             }
             else
             {
