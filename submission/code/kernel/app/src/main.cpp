@@ -66,11 +66,13 @@ bool bad_filename(std::string const & fname)
 
 int main(int argc, char **argv)
 {
+    unsigned int ts_threshold = 8000;
     float ts_s = 4.0;
     unsigned int ts_clauses = 3200;
     int ts_njobs = 2;
     int ts_max_weight = std::numeric_limits<int>::max();
     bool boost_tpf = true;
+    unsigned int nepochs = 20u;
     std::string model_ifname;
     std::string csv_ifname;
     std::string encoder_ifname;
@@ -90,6 +92,7 @@ int main(int argc, char **argv)
         clipp::required("--encoding", "-e").doc("Input JSON file with input encoding parameters") & clipp::value("JSON encoding file to read from", encoder_ifname),
         clipp::option("--model", "-m").doc("Pre-trained input model to load") & clipp::value("JSON-ized model file to read from", model_ifname),
 
+        clipp::option("--tsetlini-threshold", "-T").doc("Threshold parameter for the Tsetlini model") & clipp::value(is_natural(), "threshold=" + std::to_string(ts_threshold), ts_threshold),
         clipp::option("--tsetlini-s", "-s").doc("Specificity parameter for the Tsetlini model") & clipp::value("s=" + std::to_string(ts_s), ts_s),
         clipp::option("--tsetlini-clauses", "-C").doc("Number of clauses parameter for the Tsetlini model") & clipp::value(is_natural(), "clauses=" + std::to_string(ts_clauses), ts_clauses),
         (
@@ -97,7 +100,8 @@ int main(int argc, char **argv)
             clipp::option("--tsetlini-no-boost-tpf", "-b").set(boost_tpf, false)
         ).doc("Boost (T)true (P)ositive (F)eedback parameter for the Tsetlini model, default=" + std::to_string(boost_tpf)),
         clipp::option("--tsetlini-max-weight", "-w").doc("Max weight parameter for the Tsetlini model") & clipp::value(is_natural(), "max_weight=" + std::to_string(ts_max_weight), ts_max_weight),
-        clipp::option("--tsetlini-jobs", "-j").doc("Number of jobs parameter for the Tsetlini model") & clipp::value("jobs=" + std::to_string(ts_njobs), ts_njobs)
+        clipp::option("--tsetlini-jobs", "-j").doc("Number of jobs parameter for the Tsetlini model") & clipp::value("jobs=" + std::to_string(ts_njobs), ts_njobs),
+        clipp::option("--nepochs").doc("Number of epochs for each call to fit()") & clipp::value(is_natural(), "nepochs=" + std::to_string(nepochs), nepochs)
     );
 
     auto cli = (inference | training);
@@ -134,10 +138,12 @@ int main(int argc, char **argv)
             }
 
             model_params_t const model_params{
+                {"threshold", ts_threshold},
                 {"s", ts_s},
                 {"clauses", ts_clauses},
                 {"boost_tpf", boost_tpf},
                 {"max_weight", ts_max_weight},
+                {"nepochs", nepochs},
                 {"n_jobs", ts_njobs}
             };
 

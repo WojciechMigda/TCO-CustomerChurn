@@ -5,8 +5,72 @@
 #include "json_io.hpp"
 
 #include "spdlog/spdlog.h"
+#include "spdlog/stopwatch.h"
+
+#include "tsetlini/tsetlini_status_code.hpp"
+#include "tsetlini/tsetlini.hpp"
 
 #include <string>
+#include <cstdlib>
+
+
+auto error_printer = [](Tsetlini::status_message_t && msg)
+{
+    spdlog::error("{}", msg.second);
+
+    std::exit(1);
+
+    return msg;
+};
+
+
+namespace params
+{
+
+unsigned int threshold(model_params_t const & params)
+{
+    return std::get<unsigned int>(params.at("threshold"));
+}
+
+
+unsigned int clauses(model_params_t const & params)
+{
+    return std::get<unsigned int>(params.at("clauses"));
+}
+
+
+int max_weight(model_params_t const & params)
+{
+    return std::get<int>(params.at("max_weight"));
+}
+
+
+int n_jobs(model_params_t const & params)
+{
+    return std::get<int>(params.at("n_jobs"));
+}
+
+
+float s(model_params_t const & params)
+{
+    return std::get<float>(params.at("s"));
+}
+
+
+unsigned int nepochs(model_params_t const & params)
+{
+    return std::get<unsigned int>(params.at("nepochs"));
+}
+
+
+bool boost_tpf(model_params_t const & params)
+{
+    return std::get<bool>(params.at("boost_tpf"));
+}
+
+
+}  // namespace params
+
 
 
 void train(
@@ -46,4 +110,41 @@ void train(
     auto const target = extract_target(num_rows);
 
     auto X_train = encode_features(cat_rows, num_rows, encoding);
+
+
+
+    std::string const j_params = R"({
+        "threshold": )" + std::to_string(params::threshold(model_params)) + R"(,
+        "s": )" + std::to_string(params::s(model_params)) + R"(,
+        "number_of_pos_neg_clauses_per_label": )" + std::to_string(params::clauses(model_params)) + R"(,
+        "number_of_states": 127,
+        "boost_true_positive_feedback": )" + std::to_string(params::boost_tpf(model_params)) + R"(,
+        "random_state": 1,
+        "n_jobs": )" + std::to_string(params::n_jobs(model_params)) + R"(,
+        "clause_output_tile_size": 16,
+        "weighted": true,
+        "max_weight": )" + std::to_string(params::max_weight(model_params)) + R"(,
+        "verbose": false
+    })";
+
+    Tsetlini::make_classifier_bitwise(j_params)
+        .leftMap(error_printer)
+        .rightMap([&](Tsetlini::ClassifierBitwise && clf)
+        {
+            if (not model_ifname.empty())
+            {
+                // restore model from file
+            }
+
+            auto const NEPOCHS = params::nepochs(model_params);
+            spdlog::stopwatch sw;
+            spdlog::info("Partial fit initiated for {} epoch(s).", NEPOCHS);
+
+            auto ok = clf.partial_fit(X_train, target, 2, NEPOCHS);
+
+            spdlog::info("Partial fit completed in {:.1f} secs.", sw);
+
+            return clf;
+        });
+
 }
