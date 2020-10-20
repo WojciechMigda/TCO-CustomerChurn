@@ -92,7 +92,10 @@ void train(
         return;
     }
 
+    spdlog::info("Reading CSV...");
+    spdlog::stopwatch sw_csv;
     auto [cat_rows, num_rows] = read_csv(csv_ifname);
+    spdlog::info("...completed in {:.1} secs", sw_csv);
 
     if (cat_rows.empty() or num_rows.empty())
     {
@@ -113,7 +116,10 @@ void train(
 
     auto const target = extract_target(num_rows);
 
+    spdlog::info("Encoding features...");
+    spdlog::stopwatch sw_enc;
     auto X_train = encode_features(cat_rows, num_rows, encoding);
+    spdlog::info("...completed in {:.1} secs", sw_enc);
 
 
 
@@ -143,11 +149,11 @@ void train(
 
             auto const NEPOCHS = params::nepochs(model_params);
             spdlog::stopwatch sw;
-            spdlog::info("Partial fit initiated for {} epoch(s).", NEPOCHS);
+            spdlog::info("Partial fit initiated for {} epoch(s)...", NEPOCHS);
 
             auto status = clf.partial_fit(X_train, target, 2, NEPOCHS);
 
-            spdlog::info("Partial fit completed in {:.1f} secs.", sw);
+            spdlog::info("...completed in {:.1f} secs.", sw);
 
             if (status.first == Tsetlini::S_OK)
             {
