@@ -88,7 +88,7 @@ def main(
         details += "{:.4f}\t\n".format(toScore(item['at'], item['lift']))
 
     print('result:  {:.5f}'.format(result))
-    with open(DETAILS_FILENAME, 'w') as ofile:
+    with open(RESULT_FILENAME, 'w') as ofile:
         ofile.write(str(result))
 
     with open(DETAILS_FILENAME, 'w') as ofile:
