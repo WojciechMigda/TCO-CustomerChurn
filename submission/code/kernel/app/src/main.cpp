@@ -92,6 +92,7 @@ int main(int argc, char **argv)
     std::string model_ofname;
     std::string csv_ifname;
     std::string encoder_ifname;
+    std::string infer_ofname;
     bool do_infer = false;
 
 
@@ -99,7 +100,8 @@ int main(int argc, char **argv)
         clipp::command("infer").set(do_infer, true).doc("Request inference using existing model"),
         clipp::required("--datafile", "-d").doc("Input CSV file for training or inference") & clipp::value("CSV data file to read from", csv_ifname),
         clipp::required("--encoding", "-e").doc("Input JSON file with input encoding parameters") & clipp::value("JSON encoding file to read from", encoder_ifname),
-        clipp::required("--model", "-m").doc("Pre-trained input model to load") & clipp::value("JSON-ized model file to read from", model_ifname)
+        clipp::required("--model", "-m").doc("Pre-trained input model to load") & clipp::value("JSON-ized model file to read from", model_ifname),
+        clipp::required("--output", "-o").doc("Output CSV file where raw inference results will be written") & clipp::value("Output CSV file", infer_ofname)
     );
 
     auto training = (
@@ -137,7 +139,8 @@ int main(int argc, char **argv)
 
             if (bad_filename_r(csv_ifname)
                 or bad_filename_r(encoder_ifname)
-                or bad_filename_r(model_ifname))
+                or bad_filename_r(model_ifname)
+                or bad_filename_w(infer_ofname))
             {
                 std::exit(1);
             }
