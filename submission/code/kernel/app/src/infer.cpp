@@ -30,7 +30,8 @@ auto error_printer = [](Tsetlini::status_message_t && msg)
 void infer(
     std::string const & csv_ifname,
     std::string const & encoder_ifname,
-    std::string const & model_ifname)
+    std::string const & model_ifname,
+    std::string const & infer_ofname)
 {
     auto encoding = read_json(encoder_ifname);
 
@@ -55,6 +56,8 @@ void infer(
 
     spdlog::info("CSV: read {} rows with categorical features and {} rows with numerical ones.",
         cat_rows.size(), num_rows.size());
+
+    std::vector<std::string> const customers = extract_cust_id(cat_rows);
 
     spdlog::info("Encoding features...");
     spdlog::stopwatch sw_enc;
@@ -86,6 +89,12 @@ void infer(
             spdlog::info("[208] {},{}", scores[208][0], scores[208][1]);
             spdlog::info("[265] {},{}", scores[265][0], scores[265][1]);
 
+            std::ofstream ofile(infer_ofname);
+
+            for (auto ix = 0u; ix < customers.size(); ++ix)
+            {
+                ofile << fmt::format("{},{},{}\n", customers[ix], scores[ix][0], scores[ix][1]);
+            }
 
             return scores;
         });

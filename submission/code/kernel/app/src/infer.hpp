@@ -9,7 +9,8 @@
 void infer(
     std::string const & csv_ifname,
     std::string const & encoder_ifname,
-    std::string const & model_ifname);
+    std::string const & model_ifname,
+    std::string const & infer_ofname);
 
 
 #endif /* APP_SRC_INFER_HPP_ */

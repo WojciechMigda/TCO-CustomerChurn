@@ -145,7 +145,7 @@ int main(int argc, char **argv)
                 std::exit(1);
             }
 
-            infer(csv_ifname, encoder_ifname, model_ifname);
+            infer(csv_ifname, encoder_ifname, model_ifname, infer_ofname);
         }
         else
         {
