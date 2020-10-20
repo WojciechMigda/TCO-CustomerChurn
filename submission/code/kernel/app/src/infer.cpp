@@ -5,7 +5,25 @@
 #include "json/json.hpp"
 #include "spdlog/spdlog.h"
 
+#include "tsetlini/tsetlini_status_code.hpp"
+#include "tsetlini/tsetlini.hpp"
+#include "tsetlini/tsetlini_state_json.hpp"
+
 #include <string>
+#include <vector>
+#include <fstream>
+#include <streambuf>
+
+
+static
+auto error_printer = [](Tsetlini::status_message_t && msg)
+{
+    spdlog::error("{}", msg.second);
+
+    std::exit(1);
+
+    return msg;
+};
 
 
 void infer(
@@ -34,5 +52,28 @@ void infer(
     spdlog::info("CSV: read {} rows with categorical features and {} rows with numerical ones.",
         cat_rows.size(), num_rows.size());
 
-    auto X_train = encode_features(cat_rows, num_rows, encoding);
+    auto const X_test = encode_features(cat_rows, num_rows, encoding);
+
+    std::ifstream ifile(model_ifname);
+    std::string const str_state((std::istreambuf_iterator<char>(ifile)), std::istreambuf_iterator<char>());
+    Tsetlini::ClassifierStateBitwise state(Tsetlini::params_t{});
+    Tsetlini::from_json_string(state, str_state);
+
+    Tsetlini::ClassifierBitwise clf(state);
+
+    clf.predict_raw(X_test)
+        .leftMap(error_printer)
+        .rightMap([&](std::vector<Tsetlini::aligned_vector_int> && scores)
+        {
+            spdlog::info("scores {}", scores.size());
+            spdlog::info("[35] {},{}", scores[35][0], scores[35][1]);
+            spdlog::info("[36] {},{}", scores[36][0], scores[36][1]);
+            spdlog::info("[37] {},{}", scores[37][0], scores[37][1]);
+            spdlog::info("[73] {},{}", scores[73][0], scores[73][1]);
+            spdlog::info("[74] {},{}", scores[74][0], scores[74][1]);
+            spdlog::info("[75] {},{}", scores[75][0], scores[75][1]);
+            spdlog::info("[208] {},{}", scores[208][0], scores[208][1]);
+            spdlog::info("[265] {},{}", scores[265][0], scores[265][1]);
+            return scores;
+        });
 }
