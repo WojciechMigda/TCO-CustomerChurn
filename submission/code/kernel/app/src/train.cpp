@@ -119,7 +119,7 @@ void train(
     spdlog::info("Encoding features...");
     spdlog::stopwatch sw_enc;
     auto X_train = encode_features(cat_rows, num_rows, encoding);
-    spdlog::info("...completed in {:.1} secs", sw_enc);
+    spdlog::info("...completed in {:.1f} secs", sw_enc);
 
 
 

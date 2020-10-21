@@ -62,7 +62,7 @@ void infer(
     spdlog::info("Encoding features...");
     spdlog::stopwatch sw_enc;
     auto const X_test = encode_features(cat_rows, num_rows, encoding);
-    spdlog::info("...completed in {:.1} secs", sw_enc);
+    spdlog::info("...completed in {:.1f} secs", sw_enc);
 
     std::ifstream ifile(model_ifname);
     std::string const str_state((std::istreambuf_iterator<char>(ifile)), std::istreambuf_iterator<char>());
