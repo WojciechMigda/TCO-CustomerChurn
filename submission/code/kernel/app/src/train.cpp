@@ -95,7 +95,7 @@ void train(
     spdlog::info("Reading CSV...");
     spdlog::stopwatch sw_csv;
     auto [cat_rows, num_rows] = read_csv(csv_ifname);
-    spdlog::info("...completed in {:.1} secs", sw_csv);
+    spdlog::info("...completed in {:.1f} secs", sw_csv);
 
     if (cat_rows.empty() or num_rows.empty())
     {
