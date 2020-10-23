@@ -87,6 +87,111 @@ z_PR_ActivationSupportOpt_Days  float64                   365  -0.2652   6.0011
 #endif
 
 
+auto grammar_spec(auto & fsave, auto & fsave_null, auto & ssave, auto & ssave_null)
+{
+    namespace x3 = boost::spirit::x3;
+    using x3::lit;
+    using x3::float_;
+    using x3::int_;
+    using x3::char_;
+    using x3::eps;
+
+    static auto const MISSING = lit("*******");
+
+    static auto const str = *(char_ - ',');
+
+    /*
+     *  eps[fsave_null] is to handle case of an empty entry, like in ',,'
+     */
+    static auto const maybe_int = (MISSING[fsave_null] | int_[fsave] | eps[fsave_null]);
+    static auto const maybe_int_and = maybe_int >> ',';
+
+    static auto const maybe_str = (MISSING[ssave_null] | str[ssave]);
+    static auto const maybe_str_and = maybe_str >> ',';
+
+    static auto const maybe_float = (MISSING[fsave_null] | float_[fsave] | eps[fsave_null]);
+    static auto const maybe_float_and = maybe_float >> ',';
+
+    static auto rv =
+    (
+           maybe_int_and            //            report_period_m_cd    int64
+        >> str[ssave] >> ','        //            md5_cust_party_key   object
+        >> maybe_str_and            //                   province_cd   object NaN
+        >> maybe_float_and          //                         z_age  float64 NaN
+        >> maybe_str_and            //                     Gender_CD   object NaN
+        >> maybe_float_and          //     z_census_household_1p_pct  float64
+        >> maybe_float_and          //   z_census_education_high_pct  float64
+        >> maybe_float_and          //   z_census_purchase_household  float64
+        >> maybe_float_and          //      z_census_purchase_capita  float64 NaN
+        >> maybe_float_and          //        z_census_household_cnt  float64
+        >> maybe_str_and            //              prod_monodual_cd   object
+        >> maybe_int_and            //                 multiplay_cnt    int64
+        >> maybe_float_and          //                    z_line_cnt  float64 NaN
+        >> maybe_float_and          //                     z_sim_cnt  float64 NaN
+        >> maybe_int_and            //           fixed_prod_cat1_ind    int64
+        >> maybe_int_and            //            tenure_fixed_month    int64
+        >> maybe_int_and            //           tenure_mobile_month    int64
+        >> maybe_float_and          //         z_line_voice_cat1_cnt  float64 NaN
+        >> maybe_int_and            //           fixed_data_cat1_ind    int64
+        >> maybe_int_and            //           fixed_data_cat2_ind    int64
+        >> maybe_float_and          //         z_fixed_prod_cat2_cnt  float64 NaN
+        >> maybe_float_and          //         z_fixed_prod_cat1_cnt  float64 NaN
+        >> maybe_float_and          //         z_fixed_data_cat3_cnt  float64 NaN
+        >> maybe_int_and            //           fixed_prod_cat3_cnt    int64
+        >> maybe_float_and          //         device_smartphone_cnt  float64 NaN
+        >> maybe_float_and          //       z_mobile_voice_cat1_cnt  float64 NaN
+        >> maybe_float_and          //        z_mobile_data_cat1_cnt  float64 NaN
+        >> maybe_int_and            //          mobile_data_cat2_cnt    int64
+        >> maybe_float_and          //       z_mobile_voice_cat3_cnt  float64 NaN
+        >> maybe_float_and          //        z_mobile_data_cat3_cnt  float64 NaN
+        >> maybe_float_and          //               z_usg_fv_3m_avg  float64 NaN
+        >> maybe_float_and          //            z_usg_fd_mb_1m_sum  float64 NaN
+        >> maybe_float_and          //            z_usg_fd_mb_3m_avg  float64 NaN
+        >> maybe_float_and          //          z_usg_mv_ib_a_3m_avg  float64 NaN
+        >> maybe_float_and          //      z_usg_md_sms_ib_a_3m_avg  float64 NaN
+        >> maybe_float_and          //         z_usg_md_ib_mb_3m_avg  float64 NaN
+        >> maybe_int_and            //       payment_method_cash_cnt    int64
+        >> maybe_str_and            //             customer_value_cd   object NaN
+        >> maybe_float_and          //                  z_rev_1m_sum  float64 NaN
+        >> maybe_float_and          //          z_device_netcube_cnt  float64 NaN
+        >> maybe_float_and          //          z_tariff_netcube_cnt  float64 NaN
+        >> maybe_float_and          //        z_min_Prog_Max_BB_Down  float64
+        >> maybe_float_and          //              z_line_Fib2h_CNT  float64 NaN
+        >> maybe_float_and          //      z_min_Speed_Product_KBit  float64 NaN
+        >> maybe_float_and          //      z_Max_Speed_Missing_KBit  float64 NaN
+        >> maybe_float_and          //      z_Min_Speed_Reserve_KBit  float64
+        >> maybe_float_and          //             z_Max_DSL_OOS_PCT  float64
+        >> maybe_float_and          //           z_PR_Relocation_CNT  float64 NaN
+        >> maybe_float_and          //          z_PR_Relocation_Days  float64 NaN
+        >> maybe_float_and          // z_PR_ActivationSupportOpt_CNT  float64 NaN
+        >> maybe_float_and          //z_PR_ActivationSupportOpt_Days  float64
+        >> maybe_float_and          //   z_PR_DeactivationThreat_CNT  float64 NaN
+        >> maybe_float_and          //  z_PR_DeactivationSupport_CNT  float64 NaN
+        >> maybe_float_and          //  z_PR_DeactivationProdOpt_CNT  float64 NaN
+        >> maybe_float_and          // z_PR_DeactivationProdOpt_Days  float64
+        >> maybe_float_and          //         z_PR_OtherWOTopic_CNT  float64 NaN
+        >> maybe_float_and          //        z_PR_OtherWOTopic_Days  float64 NaN
+        >> maybe_float_and          //        z_PR_AddressChange_CNT  float64 NaN
+        >> maybe_float_and          //       z_PR_AddressChange_Days  float64 NaN
+        >> maybe_float_and          //    z_PR_ServiceDisruption_CNT  float64 NaN
+        >> maybe_float_and          //   z_PR_ServiceDisruption_Days  float64
+        >> maybe_float_and          //        z_PR_BasketSupport_CNT  float64 NaN
+        >> maybe_float_and          //       z_PR_BasketSupport_Days  float64 NaN
+        >> maybe_float_and          //  z_PR_SellingSalesSupport_CNT  float64 NaN
+        >> maybe_float_and          // z_PR_SellingSalesSupport_Days  float64
+        >> maybe_float_and          //         z_PR_DigitalUsage_CNT  float64 NaN
+        >> maybe_float_and          //        z_PR_DigitalUsage_Days  float64
+        >> maybe_float_and          //              z_TNPS_Last_Days  float64
+        >> maybe_float              //              z_TNPS_Score_Avg  float64
+
+        // optional
+        >> -(',' >> int_[fsave])    //                    target_ind    int64
+    );
+
+    return rv;
+}
+
+
 std::pair<bool, std::size_t> parse_line(
     std::vector<std::string> & cats,
     std::vector<float> & vals,
@@ -114,100 +219,10 @@ std::pair<bool, std::size_t> parse_line(
     auto ssave_null = [&](auto & ctx){ cats.push_back(std::string()); };
 
 
-    auto const MISSING = lit("*******");
-
-    auto const str = *(char_ - ',');
-
-    /*
-     *  eps[fsave_null] is to handle case of an empty entry, like in ',,'
-     */
-    auto const maybe_int = (MISSING[fsave_null] | int_[fsave] | eps[fsave_null]);
-    auto const maybe_int_and = maybe_int >> ',';
-
-    auto const maybe_str = (MISSING[ssave_null] | str[ssave]);
-    auto const maybe_str_and = maybe_str >> ',';
-
-    auto const maybe_float = (MISSING[fsave_null] | float_[fsave] | eps[fsave_null]);
-    auto const maybe_float_and = maybe_float >> ',';
-
     bool rv = phrase_parse(
         first,
         last,
-        //  Begin grammar
-        (
-               maybe_int_and            //            report_period_m_cd    int64
-            >> str[ssave] >> ','        //            md5_cust_party_key   object
-            >> maybe_str_and            //                   province_cd   object NaN
-            >> maybe_float_and          //                         z_age  float64 NaN
-            >> maybe_str_and            //                     Gender_CD   object NaN
-            >> maybe_float_and          //     z_census_household_1p_pct  float64
-            >> maybe_float_and          //   z_census_education_high_pct  float64
-            >> maybe_float_and          //   z_census_purchase_household  float64
-            >> maybe_float_and          //      z_census_purchase_capita  float64 NaN
-            >> maybe_float_and          //        z_census_household_cnt  float64
-            >> maybe_str_and            //              prod_monodual_cd   object
-            >> maybe_int_and            //                 multiplay_cnt    int64
-            >> maybe_float_and          //                    z_line_cnt  float64 NaN
-            >> maybe_float_and          //                     z_sim_cnt  float64 NaN
-            >> maybe_int_and            //           fixed_prod_cat1_ind    int64
-            >> maybe_int_and            //            tenure_fixed_month    int64
-            >> maybe_int_and            //           tenure_mobile_month    int64
-            >> maybe_float_and          //         z_line_voice_cat1_cnt  float64 NaN
-            >> maybe_int_and            //           fixed_data_cat1_ind    int64
-            >> maybe_int_and            //           fixed_data_cat2_ind    int64
-            >> maybe_float_and          //         z_fixed_prod_cat2_cnt  float64 NaN
-            >> maybe_float_and          //         z_fixed_prod_cat1_cnt  float64 NaN
-            >> maybe_float_and          //         z_fixed_data_cat3_cnt  float64 NaN
-            >> maybe_int_and            //           fixed_prod_cat3_cnt    int64
-            >> maybe_float_and          //         device_smartphone_cnt  float64 NaN
-            >> maybe_float_and          //       z_mobile_voice_cat1_cnt  float64 NaN
-            >> maybe_float_and          //        z_mobile_data_cat1_cnt  float64 NaN
-            >> maybe_int_and            //          mobile_data_cat2_cnt    int64
-            >> maybe_float_and          //       z_mobile_voice_cat3_cnt  float64 NaN
-            >> maybe_float_and          //        z_mobile_data_cat3_cnt  float64 NaN
-            >> maybe_float_and          //               z_usg_fv_3m_avg  float64 NaN
-            >> maybe_float_and          //            z_usg_fd_mb_1m_sum  float64 NaN
-            >> maybe_float_and          //            z_usg_fd_mb_3m_avg  float64 NaN
-            >> maybe_float_and          //          z_usg_mv_ib_a_3m_avg  float64 NaN
-            >> maybe_float_and          //      z_usg_md_sms_ib_a_3m_avg  float64 NaN
-            >> maybe_float_and          //         z_usg_md_ib_mb_3m_avg  float64 NaN
-            >> maybe_int_and            //       payment_method_cash_cnt    int64
-            >> maybe_str_and            //             customer_value_cd   object NaN
-            >> maybe_float_and          //                  z_rev_1m_sum  float64 NaN
-            >> maybe_float_and          //          z_device_netcube_cnt  float64 NaN
-            >> maybe_float_and          //          z_tariff_netcube_cnt  float64 NaN
-            >> maybe_float_and          //        z_min_Prog_Max_BB_Down  float64
-            >> maybe_float_and          //              z_line_Fib2h_CNT  float64 NaN
-            >> maybe_float_and          //      z_min_Speed_Product_KBit  float64 NaN
-            >> maybe_float_and          //      z_Max_Speed_Missing_KBit  float64 NaN
-            >> maybe_float_and          //      z_Min_Speed_Reserve_KBit  float64
-            >> maybe_float_and          //             z_Max_DSL_OOS_PCT  float64
-            >> maybe_float_and          //           z_PR_Relocation_CNT  float64 NaN
-            >> maybe_float_and          //          z_PR_Relocation_Days  float64 NaN
-            >> maybe_float_and          // z_PR_ActivationSupportOpt_CNT  float64 NaN
-            >> maybe_float_and          //z_PR_ActivationSupportOpt_Days  float64
-            >> maybe_float_and          //   z_PR_DeactivationThreat_CNT  float64 NaN
-            >> maybe_float_and          //  z_PR_DeactivationSupport_CNT  float64 NaN
-            >> maybe_float_and          //  z_PR_DeactivationProdOpt_CNT  float64 NaN
-            >> maybe_float_and          // z_PR_DeactivationProdOpt_Days  float64
-            >> maybe_float_and          //         z_PR_OtherWOTopic_CNT  float64 NaN
-            >> maybe_float_and          //        z_PR_OtherWOTopic_Days  float64 NaN
-            >> maybe_float_and          //        z_PR_AddressChange_CNT  float64 NaN
-            >> maybe_float_and          //       z_PR_AddressChange_Days  float64 NaN
-            >> maybe_float_and          //    z_PR_ServiceDisruption_CNT  float64 NaN
-            >> maybe_float_and          //   z_PR_ServiceDisruption_Days  float64
-            >> maybe_float_and          //        z_PR_BasketSupport_CNT  float64 NaN
-            >> maybe_float_and          //       z_PR_BasketSupport_Days  float64 NaN
-            >> maybe_float_and          //  z_PR_SellingSalesSupport_CNT  float64 NaN
-            >> maybe_float_and          // z_PR_SellingSalesSupport_Days  float64
-            >> maybe_float_and          //         z_PR_DigitalUsage_CNT  float64 NaN
-            >> maybe_float_and          //        z_PR_DigitalUsage_Days  float64
-            >> maybe_float_and          //              z_TNPS_Last_Days  float64
-            >> maybe_float              //              z_TNPS_Score_Avg  float64
-
-            // optional
-            >> -(',' >> int_[fsave])    //                    target_ind    int64
-        )
+        grammar_spec(fsave, fsave_null, ssave, ssave_null)
         ,
         //  End grammar
 
