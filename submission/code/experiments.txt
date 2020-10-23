@@ -1,0 +1,70 @@
+===========
+Encoding 10
+
+25.87097    C 1000 T 800 s 4.0 w 32 nepochs 1
+
+
+26.26882    C 1000 T 800 s 4.0 w -1 nepochs 1
+22.74194    C 1000 T 800 s 4.0 w -1 nepochs 10
+
+
+30.21505    C 1000 T 800 s 8.0 w 32 nepochs 1
+26.49462    C 1000 T 800 s 8.0 w 32 nepochs 10
+
+
+29.00000    C 1000 T 800 s 8.0 w -1 nepochs 1
+27.77419    C 1000 T 800 s 8.0 w -1 nepochs 10
+
+
+29.05376    C 1000 T 400 s 8.0 w -1 nepochs 1
+    28.09677    C 1000 T 400 s 8.0 w -1 nepochs 1 (bez seasonal)
+28.56989    C 1000 T 400 s 8.0 w -1 nepochs 10
+26.06452    C 1000 T 400 s 8.0 w -1 nepochs 50
+
+
+27.84946    C 1000 T 400 s 27.0 w -1 nepochs 1
+26.05376    C 1000 T 400 s 27.0 w -1 nepochs 10
+TODO 50 epoch
+
+
+27.98925    C 1000 T 400 s 50.0 w -1 nepochs 1
+24.87097    C 1000 T 400 s 50.0 w -1 nepochs 10
+TODO 50
+
+27.17204    C 5000 T 1280 s 8.0 w -1 nepochs 1
+
+23.17204    C 200 T 800 s 8.0 w -1 nepochs 1
+26.64516    C 500 T 200 s 8.0 w -1 nepochs 1
+26.70968    C 500 T 400 s 8.0 w -1 nepochs 1
+27.37634    C 500 T 800 s 8.0 w -1 nepochs 1
+29.01075    C 500 T 2000 s 8.0 w -1 nepochs 1
+    28.95699    C 500 T 2000 s 8.0 w -1 nepochs 1 (bez seasonal)
+27.87097    C 500 T 5000 s 8.0 w -1 nepochs 1
+
+29.59140    C 1000 T 4000 s 8.0 w -1 nepochs 1
+30.31183    C 1000 T 10000 s 8.0 w -1 nepochs 1
+
+28.17204    C 1000 T 4000 s 27.0 w -1 nepochs 1
+28.48387    C 1000 T 4000 s 27.0 w -1 nepochs 50
+
+29.61290    C 1000 T 10000 s 27.0 w -1 nepochs 1
+28.11828    C 1000 T 10000 s 27.0 w -1 nepochs 50
+
+30.02151    C 4000 T 16000 s 8.0 w -1 nepochs 1
+    27.96774    C 4000 T 16000 s 8.0 w -1 nepochs 5
+30.13978    C 4000 T 16000 s 8.0 w -1 boost-tpf 0 nepochs 1
+
+===========
+Encoding 20
+28.69892    C 1000 T 4000 s 8.0 w -1 nepochs 1
+28.44086    C 1000 T 10000 s 8.0 w -1 nepochs 1
+
+===========
+Encoding 32
+28.15054    C 1000 T 4000 s 8.0 w -1 nepochs 1
+30.01075    C 2000 T 8000 s 8.0 w -1 nepochs 1
+30.47312    C 4000 T 16000 s 8.0 w -1 nepochs 1
+    29.15054    C 4000 T 16000 s 8.0 w -1 nepochs 2
+    29.21505    C 4000 T 16000 s 8.0 w -1 nepochs 5
+30.75269    C 10000 T 40000 s 8.0 w -1 nepochs 1
+
