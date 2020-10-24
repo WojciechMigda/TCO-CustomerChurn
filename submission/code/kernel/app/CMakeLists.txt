@@ -16,6 +16,7 @@ target_sources( ${APP} PRIVATE
   "src/data_tools.cpp"
   "src/json_io.cpp"
   "src/columns.cpp"
+  "src/filesystem.cpp"
 )
 
 include_directories( "src" )
@@ -31,4 +32,4 @@ include_directories(
 include_directories(
   "$<TARGET_PROPERTY:spdlog,MY_INCLUDE_DIRS>" )
 
-target_link_libraries( ${APP} ${Tsetlini_LIBRARY} )
+target_link_libraries( ${APP} ${Tsetlini_LIBRARY} stdc++fs )

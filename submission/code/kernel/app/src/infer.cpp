@@ -1,6 +1,7 @@
 #include "read_csv.hpp"
 #include "json_io.hpp"
 #include "data_tools.hpp"
+#include "filesystem.hpp"
 
 #include "json/json.hpp"
 #include "spdlog/spdlog.h"
@@ -41,8 +42,12 @@ void infer(
 
         return;
     }
+    else
+    {
+        spdlog::info("JSON: read encodings from {}", filename(encoder_ifname));
+    }
 
-    spdlog::info("Reading CSV...");
+    spdlog::info("CSV: reading {} ...", filename(csv_ifname));
     spdlog::stopwatch sw_csv;
     auto [cat_rows, num_rows] = read_csv(csv_ifname);
     spdlog::info("...completed in {:.1f} secs", sw_csv);

@@ -3,6 +3,7 @@
 #include "columns.hpp"
 #include "data_tools.hpp"
 #include "json_io.hpp"
+#include "filesystem.hpp"
 
 #include "spdlog/spdlog.h"
 #include "spdlog/stopwatch.h"
@@ -91,8 +92,12 @@ void train(
 
         return;
     }
+    else
+    {
+        spdlog::info("JSON: read encodings from {}", filename(encoder_ifname));
+    }
 
-    spdlog::info("Reading CSV...");
+    spdlog::info("CSV: reading {} ...", filename(csv_ifname));
     spdlog::stopwatch sw_csv;
     auto [cat_rows, num_rows] = read_csv(csv_ifname);
     spdlog::info("...completed in {:.1f} secs", sw_csv);
@@ -137,6 +142,35 @@ void train(
         "verbose": false
     })";
 
+
+    auto train = [&](Tsetlini::ClassifierBitwise & clf)
+    {
+        auto const NEPOCHS = params::nepochs(model_params);
+        spdlog::stopwatch sw;
+        spdlog::info("Partial fit initiated for {} epoch(s)...", NEPOCHS);
+
+        auto status = clf.partial_fit(X_train, target, 2, NEPOCHS);
+
+        spdlog::info("...completed in {:.1f} secs.", sw);
+
+        if (status.first == Tsetlini::S_OK)
+        {
+            std::string const js_state = Tsetlini::to_json_string(clf.read_state());
+
+            std::ofstream ofile(model_ofname);
+
+            ofile << js_state;
+            ofile.close();
+
+            spdlog::info("Model saved into {}", filename(model_ofname));
+        }
+        else
+        {
+            spdlog::error("Partial fit completed with an error: {}", status.first);
+        }
+    };
+
+
     Tsetlini::make_classifier_bitwise(j_params)
         .leftMap(error_printer)
         .rightMap([&](Tsetlini::ClassifierBitwise && clf)
@@ -147,29 +181,7 @@ void train(
                 spdlog::warn("Not implemented");
             }
 
-            auto const NEPOCHS = params::nepochs(model_params);
-            spdlog::stopwatch sw;
-            spdlog::info("Partial fit initiated for {} epoch(s)...", NEPOCHS);
-
-            auto status = clf.partial_fit(X_train, target, 2, NEPOCHS);
-
-            spdlog::info("...completed in {:.1f} secs.", sw);
-
-            if (status.first == Tsetlini::S_OK)
-            {
-                std::string const js_state = Tsetlini::to_json_string(clf.read_state());
-
-                std::ofstream ofile(model_ofname);
-
-                ofile << js_state;
-                ofile.close();
-
-                spdlog::info("Model saved into {}", model_ofname);
-            }
-            else
-            {
-                spdlog::error("Partial fit completed with an error: {}", status.first);
-            }
+            train(clf);
 
             return clf;
         });
