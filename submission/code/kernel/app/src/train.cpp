@@ -142,10 +142,10 @@ void train(
         "verbose": false
     })";
 
+    auto const NEPOCHS = params::nepochs(model_params);
 
-    auto train = [&](Tsetlini::ClassifierBitwise & clf)
+    auto train_model = [&](Tsetlini::ClassifierBitwise & clf)
     {
-        auto const NEPOCHS = params::nepochs(model_params);
         spdlog::stopwatch sw;
         spdlog::info("Partial fit initiated for {} epoch(s)...", NEPOCHS);
 
@@ -171,18 +171,47 @@ void train(
     };
 
 
-    Tsetlini::make_classifier_bitwise(j_params)
-        .leftMap(error_printer)
-        .rightMap([&](Tsetlini::ClassifierBitwise && clf)
-        {
-            if (not model_ifname.empty())
+    auto params_to_string = [](Tsetlini::ClassifierBitwise const & clf, unsigned int const NEPOCHS) -> std::string
+    {
+        Tsetlini::params_t const p = clf.read_params();
+
+        auto const C = std::get<int>(p.at("number_of_pos_neg_clauses_per_label"));
+        auto const T = std::get<int>(p.at("threshold"));
+        auto const s = std::get<Tsetlini::real_type>(p.at("s"));
+        auto const w = std::get<int>(p.at("max_weight"));
+        auto const btpf = std::get<int>(p.at("boost_true_positive_feedback"));
+
+        std::string rv = fmt::format("C {} T {} s {:.1f} w {} boost-tpf {} nepochs {}",
+            C, T, s, w == std::numeric_limits<int>::max() ? -1 : w, btpf, NEPOCHS);
+
+        return rv;
+    };
+
+    if (not model_ifname.empty())
+    {
+        std::ifstream ifile(model_ifname);
+        std::string const str_state((std::istreambuf_iterator<char>(ifile)), std::istreambuf_iterator<char>());
+        Tsetlini::ClassifierStateBitwise state(Tsetlini::params_t{});
+        Tsetlini::from_json_string(state, str_state);
+        spdlog::info("Model restored from {}", filename(model_ifname));
+
+        Tsetlini::ClassifierBitwise clf(state);
+
+        spdlog::info("{}", params_to_string(clf, NEPOCHS));
+
+        train_model(clf);
+    }
+    else
+    {
+        Tsetlini::make_classifier_bitwise(j_params)
+            .leftMap(error_printer)
+            .rightMap([&](Tsetlini::ClassifierBitwise && clf)
             {
-                // restore model from file
-                spdlog::warn("Not implemented");
-            }
+                spdlog::info("{}", params_to_string(clf, NEPOCHS));
 
-            train(clf);
+                train_model(clf);
 
-            return clf;
-        });
+                return clf;
+            });
+    }
 }
