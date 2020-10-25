@@ -79,6 +79,18 @@ bool regression(model_params_t const & params)
 }
 
 
+std::string loss_fn(model_params_t const & params)
+{
+    return std::get<std::string>(params.at("loss_fn"));
+}
+
+
+float loss_fn_C1(model_params_t const & params)
+{
+    return std::get<float>(params.at("loss_fn_C1"));
+}
+
+
 }  // namespace params
 
 
@@ -196,6 +208,13 @@ void train(
         std::string rv = fmt::format("C {} T {} s {:.1f} w {} boost-tpf {} nepochs {}",
             C, T, s, w == std::numeric_limits<int>::max() ? -1 : w, btpf, NEPOCHS);
 
+        if (do_regression)
+        {
+            auto const L = std::get<std::string>(p.at("loss_fn"));
+            auto const C1 = std::get<Tsetlini::real_type>(p.at("loss_fn_C1"));
+            rv += fmt::format(" L {}, C1 {:f}", L, C1);
+        }
+
         return rv;
     };
 
@@ -264,7 +283,8 @@ void train(
                 "number_of_regressor_clauses": )" + std::to_string(params::clauses(model_params)) + R"(,
                 "number_of_states": 127,
                 "boost_true_positive_feedback": )" + std::to_string(params::boost_tpf(model_params)) + R"(,
-                "loss_fn": "MSE",
+                "loss_fn": ")" + params::loss_fn(model_params) + R"(",
+                "loss_fn_C1": )" + std::to_string(params::loss_fn_C1(model_params)) + R"(,
                 "random_state": 1,
                 "n_jobs": )" + std::to_string(params::n_jobs(model_params)) + R"(,
                 "clause_output_tile_size": 16,

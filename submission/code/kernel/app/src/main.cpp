@@ -95,6 +95,8 @@ int main(int argc, char **argv)
     std::string infer_ofname;
     bool do_infer = false;
     bool do_regression = false;
+    std::string ts_loss_fn = "MSE";
+    float ts_loss_fn_C1 = 0.f;
 
 
     auto inference = (
@@ -115,6 +117,8 @@ int main(int argc, char **argv)
         clipp::option("--tsetlini-threshold", "-T").doc("Threshold parameter for the Tsetlini model") & clipp::value(is_natural(), "threshold=" + std::to_string(ts_threshold), ts_threshold),
         clipp::option("--tsetlini-s", "-s").doc("Specificity parameter for the Tsetlini model") & clipp::value("s=" + std::to_string(ts_s), ts_s),
         clipp::option("--tsetlini-clauses", "-C").doc("Number of clauses parameter for the Tsetlini model") & clipp::value(is_natural(), "clauses=" + std::to_string(ts_clauses), ts_clauses),
+        clipp::option("--tsetlini-loss-fn", "-L").doc("Loss function selection parameter for the Tsetlini model") & clipp::value("loss_fn=" + ts_loss_fn, ts_loss_fn),
+        clipp::option("--tsetlini-loss-fn-C1", "-C1").doc("Loss function C1 parameter for the Tsetlini model") & clipp::value("loss_fn_C1=" + std::to_string(ts_loss_fn_C1), ts_loss_fn_C1),
         (
             clipp::option("--tsetlini-boost-tpf", "-B").set(boost_tpf, true) |
             clipp::option("--tsetlini-no-boost-tpf", "-b").set(boost_tpf, false)
@@ -169,6 +173,8 @@ int main(int argc, char **argv)
                 {"s", ts_s},
                 {"clauses", ts_clauses},
                 {"boost_tpf", boost_tpf},
+                {"loss_fn", ts_loss_fn},
+                {"loss_fn_C1", ts_loss_fn_C1},
                 {"max_weight", ts_max_weight},
                 {"nepochs", nepochs},
                 {"n_jobs", ts_njobs}
