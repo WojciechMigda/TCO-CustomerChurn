@@ -94,6 +94,7 @@ int main(int argc, char **argv)
     std::string encoder_ifname;
     std::string infer_ofname;
     bool do_infer = false;
+    bool do_regression = false;
 
 
     auto inference = (
@@ -120,7 +121,11 @@ int main(int argc, char **argv)
         ).doc("Boost (T)true (P)ositive (F)eedback parameter for the Tsetlini model, default=" + std::to_string(boost_tpf)),
         clipp::option("--tsetlini-max-weight", "-w").doc("Max weight parameter for the Tsetlini model") & clipp::value(is_natural(), "max_weight=" + std::to_string(ts_max_weight), ts_max_weight),
         clipp::option("--tsetlini-jobs", "-j").doc("Number of jobs parameter for the Tsetlini model") & clipp::value("jobs=" + std::to_string(ts_njobs), ts_njobs),
-        clipp::option("--nepochs").doc("Number of epochs for each call to fit()") & clipp::value(is_natural(), "nepochs=" + std::to_string(nepochs), nepochs)
+        clipp::option("--nepochs").doc("Number of epochs for each call to fit()") & clipp::value(is_natural(), "nepochs=" + std::to_string(nepochs), nepochs),
+        (
+            clipp::option("--tsetlini-regressor", "-r").set(do_regression, true) |
+            clipp::option("--tsetlini-classifier", "-c").set(do_regression, false)
+        ).doc("Select classification vs. regression, default=" + std::to_string(do_regression))
     );
 
     auto cli = (inference | training);
@@ -159,6 +164,7 @@ int main(int argc, char **argv)
             }
 
             model_params_t const model_params{
+                {"regression", do_regression},
                 {"threshold", ts_threshold},
                 {"s", ts_s},
                 {"clauses", ts_clauses},

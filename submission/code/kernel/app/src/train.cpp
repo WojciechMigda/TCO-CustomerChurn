@@ -73,8 +73,32 @@ bool boost_tpf(model_params_t const & params)
 }
 
 
+bool regression(model_params_t const & params)
+{
+    return std::get<bool>(params.at("regression"));
+}
+
+
 }  // namespace params
 
+
+auto partial_fit(
+    Tsetlini::ClassifierBitwise & clf,
+    std::vector<Tsetlini::bit_vector_uint64> const & X_train,
+    Tsetlini::label_vector_type const & target,
+    unsigned int NEPOCHS)
+{
+    return clf.partial_fit(X_train, target, 2, NEPOCHS);
+}
+
+auto partial_fit(
+    Tsetlini::RegressorBitwise & clf,
+    std::vector<Tsetlini::bit_vector_uint64> const & X_train,
+    Tsetlini::response_vector_type const & target,
+    unsigned int NEPOCHS)
+{
+    return clf.partial_fit(X_train, target, NEPOCHS);
+}
 
 
 void train(
@@ -127,29 +151,14 @@ void train(
     spdlog::info("...completed in {:.1f} secs", sw_enc);
 
 
-
-    std::string const j_params = R"({
-        "threshold": )" + std::to_string(params::threshold(model_params)) + R"(,
-        "s": )" + std::to_string(params::s(model_params)) + R"(,
-        "number_of_pos_neg_clauses_per_label": )" + std::to_string(params::clauses(model_params)) + R"(,
-        "number_of_states": 127,
-        "boost_true_positive_feedback": )" + std::to_string(params::boost_tpf(model_params)) + R"(,
-        "random_state": 1,
-        "n_jobs": )" + std::to_string(params::n_jobs(model_params)) + R"(,
-        "clause_output_tile_size": 16,
-        "weighted": true,
-        "max_weight": )" + std::to_string(params::max_weight(model_params)) + R"(,
-        "verbose": false
-    })";
-
     auto const NEPOCHS = params::nepochs(model_params);
 
-    auto train_model = [&](Tsetlini::ClassifierBitwise & clf)
+    auto train_model = [&](auto & clf, auto const & target)
     {
         spdlog::stopwatch sw;
         spdlog::info("Partial fit initiated for {} epoch(s)...", NEPOCHS);
 
-        auto status = clf.partial_fit(X_train, target, 2, NEPOCHS);
+        auto status = partial_fit(clf, X_train, target, NEPOCHS);
 
         spdlog::info("...completed in {:.1f} secs.", sw);
 
@@ -171,11 +180,14 @@ void train(
     };
 
 
-    auto params_to_string = [](Tsetlini::ClassifierBitwise const & clf, unsigned int const NEPOCHS) -> std::string
+    auto params_to_string = [](auto const & clf, unsigned int const NEPOCHS, bool do_regression) -> std::string
     {
         Tsetlini::params_t const p = clf.read_params();
 
-        auto const C = std::get<int>(p.at("number_of_pos_neg_clauses_per_label"));
+        auto const C = do_regression ?
+            std::get<int>(p.at("number_of_regressor_clauses"))
+            :
+            std::get<int>(p.at("number_of_pos_neg_clauses_per_label"));
         auto const T = std::get<int>(p.at("threshold"));
         auto const s = std::get<Tsetlini::real_type>(p.at("s"));
         auto const w = std::get<int>(p.at("max_weight"));
@@ -187,31 +199,122 @@ void train(
         return rv;
     };
 
+
+    auto make_regression_target = [&]()
+    {
+        Tsetlini::response_vector_type y;
+        y.resize(target.size());
+        auto const T = params::threshold(model_params);
+
+        std::transform(target.cbegin(), target.cend(), y.begin(),
+            [T](int t)
+            {
+                return t == 0 ? 0 : T;
+            }
+        );
+
+        return y;
+    };
+
     if (not model_ifname.empty())
     {
         std::ifstream ifile(model_ifname);
         std::string const str_state((std::istreambuf_iterator<char>(ifile)), std::istreambuf_iterator<char>());
-        Tsetlini::ClassifierStateBitwise state(Tsetlini::params_t{});
-        Tsetlini::from_json_string(state, str_state);
-        spdlog::info("Model restored from {}", filename(model_ifname));
 
-        Tsetlini::ClassifierBitwise clf(state);
+        nlohmann::json jparams = nlohmann::json::parse(str_state);
+        bool const do_regression = jparams["estimator"] == "regressor";
+        spdlog::info("{} requested", do_regression ? "Regression" : "Classification");
 
-        spdlog::info("{}", params_to_string(clf, NEPOCHS));
+        if (do_regression)
+        {
+            Tsetlini::RegressorStateBitwise state(Tsetlini::params_t{});
+            Tsetlini::from_json_string(state, str_state);
+            spdlog::info("Model restored from {}", filename(model_ifname));
 
-        train_model(clf);
+            Tsetlini::RegressorBitwise clf(state);
+
+            spdlog::info("{}", params_to_string(clf, NEPOCHS, do_regression));
+
+            auto const y = make_regression_target();
+
+            train_model(clf, y);
+        }
+        else
+        {
+            Tsetlini::ClassifierStateBitwise state(Tsetlini::params_t{});
+            Tsetlini::from_json_string(state, str_state);
+            spdlog::info("Model restored from {}", filename(model_ifname));
+
+            Tsetlini::ClassifierBitwise clf(state);
+
+            spdlog::info("{}", params_to_string(clf, NEPOCHS, do_regression));
+
+            train_model(clf, target);
+        }
     }
     else
     {
-        Tsetlini::make_classifier_bitwise(j_params)
-            .leftMap(error_printer)
-            .rightMap([&](Tsetlini::ClassifierBitwise && clf)
-            {
-                spdlog::info("{}", params_to_string(clf, NEPOCHS));
+        bool const do_regression = params::regression(model_params);
+        spdlog::info("{} requested", do_regression ? "Regression" : "Classification");
 
-                train_model(clf);
+        std::string const j_params = do_regression ?
+            R"({
+                "threshold": )" + std::to_string(params::threshold(model_params)) + R"(,
+                "s": )" + std::to_string(params::s(model_params)) + R"(,
+                "number_of_regressor_clauses": )" + std::to_string(params::clauses(model_params)) + R"(,
+                "number_of_states": 127,
+                "boost_true_positive_feedback": )" + std::to_string(params::boost_tpf(model_params)) + R"(,
+                "loss_fn": "MSE",
+                "random_state": 1,
+                "n_jobs": )" + std::to_string(params::n_jobs(model_params)) + R"(,
+                "clause_output_tile_size": 16,
+                "weighted": true,
+                "max_weight": )" + std::to_string(params::max_weight(model_params)) + R"(,
+                "verbose": false
+                })"
+            :
+            R"({
+                "threshold": )" + std::to_string(params::threshold(model_params)) + R"(,
+                "s": )" + std::to_string(params::s(model_params)) + R"(,
+                "number_of_pos_neg_clauses_per_label": )" + std::to_string(params::clauses(model_params)) + R"(,
+                "number_of_states": 127,
+                "boost_true_positive_feedback": )" + std::to_string(params::boost_tpf(model_params)) + R"(,
+                "random_state": 1,
+                "n_jobs": )" + std::to_string(params::n_jobs(model_params)) + R"(,
+                "clause_output_tile_size": 16,
+                "weighted": true,
+                "max_weight": )" + std::to_string(params::max_weight(model_params)) + R"(,
+                "verbose": false
+                })"
+            ;
 
-                return clf;
-            });
+        if (do_regression)
+        {
+            auto const y = make_regression_target();
+
+            Tsetlini::make_regressor_bitwise(j_params)
+                .leftMap(error_printer)
+                .rightMap([&](Tsetlini::RegressorBitwise && clf)
+                {
+                    spdlog::info("{}", params_to_string(clf, NEPOCHS, do_regression));
+
+                    train_model(clf, y);
+
+                    return clf;
+                });
+        }
+        else
+        {
+            Tsetlini::make_classifier_bitwise(j_params)
+                .leftMap(error_printer)
+                .rightMap([&](Tsetlini::ClassifierBitwise && clf)
+                {
+                    spdlog::info("{}", params_to_string(clf, NEPOCHS, do_regression));
+
+                    train_model(clf, target);
+
+                    return clf;
+                });
+        }
     }
 }
