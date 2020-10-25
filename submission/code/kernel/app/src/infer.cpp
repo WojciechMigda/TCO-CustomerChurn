@@ -15,6 +15,7 @@
 #include <vector>
 #include <fstream>
 #include <streambuf>
+#include <iterator>
 
 
 static
@@ -76,6 +77,9 @@ void infer(
 
     Tsetlini::ClassifierBitwise clf(state);
 
+    auto const params = clf.read_params();
+    double const T = std::get<int>(params.at("threshold"));
+
     spdlog::info("Predicting...");
     spdlog::stopwatch sw_pred;
     clf.predict_raw(X_test)
@@ -84,21 +88,33 @@ void infer(
         {
             spdlog::info("...completed in {:.1f} secs", sw_pred);
 
+            std::vector<double> probas;
+            probas.reserve(scores.size());
+            std::transform(scores.cbegin(), scores.cend(), std::back_inserter(probas),
+                [T](Tsetlini::aligned_vector_int const & sc)
+                {
+                    double rv = 0.5 + (sc[1] - sc[0]) / (4 * T);
+
+                    return rv;
+                }
+            );
+
             spdlog::info("scores {}", scores.size());
-            spdlog::info("[35] {},{}", scores[35][0], scores[35][1]);
-            spdlog::info("[36] {},{}", scores[36][0], scores[36][1]);
-            spdlog::info("[37] {},{}", scores[37][0], scores[37][1]);
-            spdlog::info("[73] {},{}", scores[73][0], scores[73][1]);
-            spdlog::info("[74] {},{}", scores[74][0], scores[74][1]);
-            spdlog::info("[75] {},{}", scores[75][0], scores[75][1]);
-            spdlog::info("[208] {},{}", scores[208][0], scores[208][1]);
-            spdlog::info("[265] {},{}", scores[265][0], scores[265][1]);
+            spdlog::info("[35] {},{},{:.5f}", scores[35][0], scores[35][1], probas[35]);
+            spdlog::info("[36] {},{},{:.5f}", scores[36][0], scores[36][1], probas[36]);
+            spdlog::info("[37] {},{},{:.5f}", scores[37][0], scores[37][1], probas[37]);
+            spdlog::info("[73] {},{},{:.5f}", scores[73][0], scores[73][1], probas[73]);
+            spdlog::info("[74] {},{},{:.5f}", scores[74][0], scores[74][1], probas[74]);
+            spdlog::info("[75] {},{},{:.5f}", scores[75][0], scores[75][1], probas[75]);
+            spdlog::info("[208] {},{},{:.5f}", scores[208][0], scores[208][1], probas[208]);
+            spdlog::info("[265] {},{},{:.5f}", scores[265][0], scores[265][1], probas[265]);
 
             std::ofstream ofile(infer_ofname);
 
             for (auto ix = 0u; ix < customers.size(); ++ix)
             {
-                ofile << fmt::format("{},{},{}\n", customers[ix], scores[ix][0], scores[ix][1]);
+                //ofile << fmt::format("{},{},{}\n", customers[ix], scores[ix][0], scores[ix][1]);
+                ofile << fmt::format("{},{:.8f}\n", customers[ix], probas[ix]);
             }
 
             return scores;
