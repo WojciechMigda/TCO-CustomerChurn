@@ -97,6 +97,7 @@ int main(int argc, char **argv)
     bool do_regression = false;
     std::string ts_loss_fn = "MSE";
     float ts_loss_fn_C1 = 0.f;
+    bool f201906 = false;
 
 
     auto inference = (
@@ -104,7 +105,8 @@ int main(int argc, char **argv)
         clipp::required("--datafile", "-d").doc("Input CSV file for training or inference") & clipp::value("CSV data file to read from", csv_ifname),
         clipp::required("--encoding", "-e").doc("Input JSON file with input encoding parameters") & clipp::value("JSON encoding file to read from", encoder_ifname),
         clipp::required("--model", "-m").doc("Pre-trained input model to load") & clipp::value("JSON-ized model file to read from", model_ifname),
-        clipp::required("--output", "-o").doc("Output CSV file where raw inference results will be written") & clipp::value("Output CSV file", infer_ofname)
+        clipp::required("--output", "-o").doc("Output CSV file where raw inference results will be written") & clipp::value("Output CSV file", infer_ofname),
+        clipp::option("--f201906").set(f201906, true).doc("Enable encoding YYYYMM >= 201906, default=" + std::to_string(f201906))
     );
 
     auto training = (
@@ -126,6 +128,7 @@ int main(int argc, char **argv)
         clipp::option("--tsetlini-max-weight", "-w").doc("Max weight parameter for the Tsetlini model") & clipp::value(is_natural(), "max_weight=" + std::to_string(ts_max_weight), ts_max_weight),
         clipp::option("--tsetlini-jobs", "-j").doc("Number of jobs parameter for the Tsetlini model") & clipp::value("jobs=" + std::to_string(ts_njobs), ts_njobs),
         clipp::option("--nepochs").doc("Number of epochs for each call to fit()") & clipp::value(is_natural(), "nepochs=" + std::to_string(nepochs), nepochs),
+        clipp::option("--f201906").set(f201906, true).doc("Enable encoding YYYYMM >= 201906, default=" + std::to_string(f201906)),
         (
             clipp::option("--tsetlini-regressor", "-r").set(do_regression, true) |
             clipp::option("--tsetlini-classifier", "-c").set(do_regression, false)
@@ -154,7 +157,7 @@ int main(int argc, char **argv)
                 std::exit(1);
             }
 
-            infer(csv_ifname, encoder_ifname, model_ifname, infer_ofname);
+            infer(csv_ifname, encoder_ifname, model_ifname, infer_ofname, f201906);
         }
         else
         {
@@ -180,7 +183,7 @@ int main(int argc, char **argv)
                 {"n_jobs", ts_njobs}
             };
 
-            train(csv_ifname, encoder_ifname, model_ifname, model_ofname, model_params);
+            train(csv_ifname, encoder_ifname, model_ifname, model_ofname, model_params, f201906);
         }
     }
 

@@ -118,7 +118,8 @@ void train(
     std::string const & encoder_ifname,
     std::string const & model_ifname,
     std::string const & model_ofname,
-    model_params_t const & model_params)
+    model_params_t const & model_params,
+    bool const f201906)
 {
     auto encoding = read_json(encoder_ifname);
 
@@ -159,7 +160,7 @@ void train(
 
     spdlog::info("Encoding features...");
     spdlog::stopwatch sw_enc;
-    auto X_train = encode_features(cat_rows, num_rows, encoding);
+    auto X_train = encode_features(cat_rows, num_rows, encoding, f201906);
     spdlog::info("...completed in {:.1f} secs", sw_enc);
 
 

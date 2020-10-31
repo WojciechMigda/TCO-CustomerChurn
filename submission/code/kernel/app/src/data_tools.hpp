@@ -17,7 +17,8 @@ std::vector<int> extract_target(std::vector<std::vector<float>> & num_rows);
 std::vector<Tsetlini::bit_vector_uint64> encode_features(
     std::vector<std::vector<std::string>> & cat_rows,
     std::vector<std::vector<float>> & num_rows,
-    nlohmann::json const & encoding
+    nlohmann::json const & encoding,
+    bool const f201906
 );
 
 

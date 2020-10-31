@@ -231,10 +231,25 @@ unsigned int encode_month(
 }
 
 
+unsigned int encode_201906(
+    unsigned int const pos,
+    float const f_report_period,
+    Tsetlini::bit_vector_uint64 & bv)
+{
+    unsigned int const report_period = std::round(f_report_period);
+    bool const flag = report_period >= 201906;
+
+    bv.assign(pos, flag);
+
+    return 1;
+}
+
+
 std::vector<Tsetlini::bit_vector_uint64> encode_features(
     std::vector<std::vector<std::string>> & cat_rows,
     std::vector<std::vector<float>> & num_rows,
-    nlohmann::json const & encoding
+    nlohmann::json const & encoding,
+    bool const f201906
 )
 {
     auto const F_SEASONAL_SZ = 12u;
@@ -246,7 +261,8 @@ std::vector<Tsetlini::bit_vector_uint64> encode_features(
         (cat_province.size() + 1) +
         (cat_gender.size() + 1) +
         (cat_prod_monodual.size() + 1) +
-        (cat_customer_value.size() + 1);
+        (cat_customer_value.size() + 1) +
+        (f201906 == true);
 
     std::vector<Tsetlini::bit_vector_uint64> df;
     df.reserve(NROWS);
@@ -273,6 +289,11 @@ std::vector<Tsetlini::bit_vector_uint64> encode_features(
         }
 
         cpos += encode_month(cpos, num_row[Num::report_period_m_cd], bv);
+
+        if (true == f201906)
+        {
+            cpos += encode_201906(cpos, num_row[Num::report_period_m_cd], bv);
+        }
 
         // encoding ends here
 

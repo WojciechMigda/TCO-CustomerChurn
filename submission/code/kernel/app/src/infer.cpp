@@ -33,7 +33,8 @@ void infer(
     std::string const & csv_ifname,
     std::string const & encoder_ifname,
     std::string const & model_ifname,
-    std::string const & infer_ofname)
+    std::string const & infer_ofname,
+    bool const f201906)
 {
     auto encoding = read_json(encoder_ifname);
 
@@ -67,7 +68,7 @@ void infer(
 
     spdlog::info("Encoding features...");
     spdlog::stopwatch sw_enc;
-    auto const X_test = encode_features(cat_rows, num_rows, encoding);
+    auto const X_test = encode_features(cat_rows, num_rows, encoding, f201906);
     spdlog::info("...completed in {:.1f} secs", sw_enc);
 
     std::ifstream ifile(model_ifname);

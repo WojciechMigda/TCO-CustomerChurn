@@ -13,7 +13,8 @@ void train(
     std::string const & encoder_ifname,
     std::string const & model_ifname,
     std::string const & model_ofname,
-    model_params_t const & model_params);
+    model_params_t const & model_params,
+    bool const f201906);
 
 
 #endif /* APP_SRC_TRAIN_HPP_ */
