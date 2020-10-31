@@ -26,10 +26,11 @@ RUN cd kernel/.build && \
     app/main -h && \
     cd /work
 
+RUN chmod +x build.sh
 RUN chmod +x train.sh
 RUN chmod +x test.sh
 RUN chmod +x infer.sh
 RUN chmod +x merge_scores.sh
+RUN chmod +x make_submission_txt.sh
 
-
-CMD /bin/sh
+#CMD /bin/sh
