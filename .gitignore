@@ -11,3 +11,6 @@ competitor_pack/
 .settings/
 .cproject
 .project
+
+data/ground_truth_201*.json
+data/input_201*.csv
