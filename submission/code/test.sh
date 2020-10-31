@@ -10,4 +10,4 @@ OUT_DIR="${2}"
 
 ./merge_scores.sh "${OUT_DIR}"/regr1.scores > "${OUT_DIR}"/scores.txt
 
-./make_submission_txt.sh "${OUT_DIR}"/scores.txt > "${OUT_DIR}"/submission.txt
+./make_submission_txt.sh "${OUT_DIR}"/scores.txt > "${OUT_DIR}"/solution.txt
