@@ -3,9 +3,9 @@
 DATA_DIR="${1}"
 OUT_DIR="${2}"
 
-./infer.sh "${DATA_DIR}" "${OUT_DIR}" _regr_17_18.model regr1.scores
+#./infer.sh "${DATA_DIR}" "${OUT_DIR}" _regr_17_18.model regr1.scores
 
-./infer.sh "${DATA_DIR}" "${OUT_DIR}" _clas_4_2.model clas1.scores
+./infer.sh "${DATA_DIR}" "${OUT_DIR}" _clas_6_13.model clas1.scores
 
 
 ./merge_scores.sh "${OUT_DIR}"/clas1.scores > "${OUT_DIR}"/scores.txt

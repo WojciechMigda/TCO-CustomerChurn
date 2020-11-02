@@ -10,4 +10,5 @@ ${EXE} infer \
       -d "${DATA_DIR}"/input.csv \
       -e encoding-20.json \
       -m models/"${MODEL}" \
-      -o "${OUT_DIR}"/"${OUT_SCORES}"
+      -o "${OUT_DIR}"/"${OUT_SCORES}" \
+      --f201906
