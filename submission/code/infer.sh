@@ -8,7 +8,7 @@ OUT_SCORES="${4}"
 
 ${EXE} infer \
       -d "${DATA_DIR}"/input.csv \
-      -e encoding-20.json \
+      -e encoding-32.json \
       -m models/"${MODEL}" \
       -o "${OUT_DIR}"/"${OUT_SCORES}" \
       --f201906
