@@ -18,7 +18,8 @@ std::vector<Tsetlini::bit_vector_uint64> encode_features(
     std::vector<std::vector<std::string>> & cat_rows,
     std::vector<std::vector<float>> & num_rows,
     nlohmann::json const & encoding,
-    bool const f201906
+    bool const f201906,
+    bool const fseasonal
 );
 
 

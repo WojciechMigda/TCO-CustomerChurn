@@ -98,6 +98,7 @@ int main(int argc, char **argv)
     std::string ts_loss_fn = "MSE";
     float ts_loss_fn_C1 = 0.f;
     bool f201906 = false;
+    bool fseasonal = true;
 
 
     auto inference = (
@@ -106,7 +107,11 @@ int main(int argc, char **argv)
         clipp::required("--encoding", "-e").doc("Input JSON file with input encoding parameters") & clipp::value("JSON encoding file to read from", encoder_ifname),
         clipp::required("--model", "-m").doc("Pre-trained input model to load") & clipp::value("JSON-ized model file to read from", model_ifname),
         clipp::required("--output", "-o").doc("Output CSV file where raw inference results will be written") & clipp::value("Output CSV file", infer_ofname),
-        clipp::option("--f201906").set(f201906, true).doc("Enable encoding YYYYMM >= 201906, default=" + std::to_string(f201906))
+        clipp::option("--f201906").set(f201906, true).doc("Enable encoding YYYYMM >= 201906, default=" + std::to_string(f201906)),
+        (
+            clipp::option("--fseasonal").set(fseasonal, true) |
+            clipp::option("--fno-seasonal").set(fseasonal, false)
+        ).doc("Enable/disable encoding monthly seasonal features, default=" + std::to_string(fseasonal))
     );
 
     auto training = (
@@ -129,6 +134,10 @@ int main(int argc, char **argv)
         clipp::option("--tsetlini-jobs", "-j").doc("Number of jobs parameter for the Tsetlini model") & clipp::value("jobs=" + std::to_string(ts_njobs), ts_njobs),
         clipp::option("--nepochs").doc("Number of epochs for each call to fit()") & clipp::value(is_natural(), "nepochs=" + std::to_string(nepochs), nepochs),
         clipp::option("--f201906").set(f201906, true).doc("Enable encoding YYYYMM >= 201906, default=" + std::to_string(f201906)),
+        (
+            clipp::option("--fseasonal").set(fseasonal, true) |
+            clipp::option("--fno-seasonal").set(fseasonal, false)
+        ).doc("Enable/disable encoding monthly seasonal features, default=" + std::to_string(fseasonal)),
         (
             clipp::option("--tsetlini-regressor", "-r").set(do_regression, true) |
             clipp::option("--tsetlini-classifier", "-c").set(do_regression, false)
@@ -157,7 +166,8 @@ int main(int argc, char **argv)
                 std::exit(1);
             }
 
-            infer(csv_ifname, encoder_ifname, model_ifname, infer_ofname, f201906);
+            infer(csv_ifname, encoder_ifname, model_ifname, infer_ofname,
+                f201906, fseasonal);
         }
         else
         {
@@ -183,7 +193,8 @@ int main(int argc, char **argv)
                 {"n_jobs", ts_njobs}
             };
 
-            train(csv_ifname, encoder_ifname, model_ifname, model_ofname, model_params, f201906);
+            train(csv_ifname, encoder_ifname, model_ifname, model_ofname, model_params,
+                f201906, fseasonal);
         }
     }
 

@@ -119,7 +119,8 @@ void train(
     std::string const & model_ifname,
     std::string const & model_ofname,
     model_params_t const & model_params,
-    bool const f201906)
+    bool const f201906,
+    bool const fseasonal)
 {
     auto encoding = read_json(encoder_ifname);
 
@@ -160,7 +161,7 @@ void train(
 
     spdlog::info("Encoding features...");
     spdlog::stopwatch sw_enc;
-    auto X_train = encode_features(cat_rows, num_rows, encoding, f201906);
+    auto X_train = encode_features(cat_rows, num_rows, encoding, f201906, fseasonal);
     spdlog::info("...completed in {:.1f} secs", sw_enc);
 
 
@@ -193,7 +194,7 @@ void train(
     };
 
 
-    auto params_to_string = [](auto const & clf, bool f201906, unsigned int const NEPOCHS, bool do_regression) -> std::string
+    auto params_to_string = [](auto const & clf, bool f201906, bool fseasonal, unsigned int const NEPOCHS, bool do_regression) -> std::string
     {
         Tsetlini::params_t const p = clf.read_params();
 
@@ -206,10 +207,8 @@ void train(
         auto const w = std::get<int>(p.at("max_weight"));
         auto const btpf = std::get<int>(p.at("boost_true_positive_feedback"));
 
-        std::string rv = fmt::format("C {} T {} s {:.1f} w {} boost-tpf {} {} nepochs {}",
-            C, T, s, w == std::numeric_limits<int>::max() ? -1 : w, btpf,
-            f201906 ? "f201906" : "",
-            NEPOCHS);
+        std::string rv = fmt::format("C {} T {} s {:.1f} w {} boost-tpf {} nepochs {}",
+            C, T, s, w == std::numeric_limits<int>::max() ? -1 : w, btpf, NEPOCHS);
 
         if (do_regression)
         {
@@ -217,6 +216,13 @@ void train(
             auto const C1 = std::get<Tsetlini::real_type>(p.at("loss_fn_C1"));
             rv += fmt::format(" L {}, C1 {:f}", L, C1);
         }
+
+        if (f201906)
+        {
+            rv += " f201906";
+        }
+
+        rv += fseasonal ? " seasonal" : " no-seasonal";
 
         return rv;
     };
@@ -255,7 +261,7 @@ void train(
 
             Tsetlini::RegressorBitwise clf(state);
 
-            spdlog::info("{}", params_to_string(clf, f201906, NEPOCHS, do_regression));
+            spdlog::info("{}", params_to_string(clf, f201906, fseasonal, NEPOCHS, do_regression));
 
             auto const y = make_regression_target();
 
@@ -269,7 +275,7 @@ void train(
 
             Tsetlini::ClassifierBitwise clf(state);
 
-            spdlog::info("{}", params_to_string(clf, f201906, NEPOCHS, do_regression));
+            spdlog::info("{}", params_to_string(clf, f201906, fseasonal, NEPOCHS, do_regression));
 
             train_model(clf, target);
         }
@@ -319,7 +325,7 @@ void train(
                 .leftMap(error_printer)
                 .rightMap([&](Tsetlini::RegressorBitwise && clf)
                 {
-                    spdlog::info("{}", params_to_string(clf, f201906, NEPOCHS, do_regression));
+                    spdlog::info("{}", params_to_string(clf, f201906, fseasonal, NEPOCHS, do_regression));
 
                     train_model(clf, y);
 
@@ -332,7 +338,7 @@ void train(
                 .leftMap(error_printer)
                 .rightMap([&](Tsetlini::ClassifierBitwise && clf)
                 {
-                    spdlog::info("{}", params_to_string(clf, f201906, NEPOCHS, do_regression));
+                    spdlog::info("{}", params_to_string(clf, f201906, fseasonal, NEPOCHS, do_regression));
 
                     train_model(clf, target);
 

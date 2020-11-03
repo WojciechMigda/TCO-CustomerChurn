@@ -249,7 +249,8 @@ std::vector<Tsetlini::bit_vector_uint64> encode_features(
     std::vector<std::vector<std::string>> & cat_rows,
     std::vector<std::vector<float>> & num_rows,
     nlohmann::json const & encoding,
-    bool const f201906
+    bool const f201906,
+    bool const fseasonal
 )
 {
     auto const F_SEASONAL_SZ = 12u;
@@ -257,7 +258,7 @@ std::vector<Tsetlini::bit_vector_uint64> encode_features(
     unsigned int const NROWS = cat_rows.size();
     unsigned int const NCOLS =
         total_kbd_bits(encoding) +
-        F_SEASONAL_SZ +
+        (fseasonal ? F_SEASONAL_SZ : 0) +
         (cat_province.size() + 1) +
         (cat_gender.size() + 1) +
         (cat_prod_monodual.size() + 1) +
@@ -288,7 +289,10 @@ std::vector<Tsetlini::bit_vector_uint64> encode_features(
             cpos += encode_num(cpos, it.key(), it.value(), num_row, bv);
         }
 
-        cpos += encode_month(cpos, num_row[Num::report_period_m_cd], bv);
+        if (true == fseasonal)
+        {
+            cpos += encode_month(cpos, num_row[Num::report_period_m_cd], bv);
+        }
 
         if (true == f201906)
         {
