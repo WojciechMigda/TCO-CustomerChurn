@@ -3,8 +3,7 @@
 DATA_DIR="${1}"
 OUT_DIR="${2}"
 
-#./infer.sh "${DATA_DIR}" "${OUT_DIR}" _regr_34_1.model regr1.scores 32
-#./infer.sh "${DATA_DIR}" "${OUT_DIR}" _regr_35_1.model regr2.scores 20
+./train.sh "${DATA_DIR}" "${OUT_DIR}" 3 32 _clas_X.model
 
 ./infer.sh "${DATA_DIR}" "${OUT_DIR}" _clas_6_1.model clas1.scores 20
 ./infer.sh "${DATA_DIR}" "${OUT_DIR}" _clas_J_1.model clas2.scores 20
