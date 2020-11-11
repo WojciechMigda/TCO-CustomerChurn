@@ -1,0 +1,800 @@
+1
+/repo/tco-customerchurn/data /repo/tco-customerchurn/submission/code/experiments/regr9
+/repo/tco-customerchurn/submission/code/experiments/regr9
+[2020-10-26 10:43:17.954] [[32minfo[m] Start
+[2020-10-26 10:43:17.954] [[32minfo[m] Training
+[2020-10-26 10:43:17.955] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 10:43:17.955] [[32minfo[m] CSV: reading history_mix_1to1.csv ...
+[2020-10-26 10:43:19.793] [[32minfo[m] ...completed in 1.8 secs
+[2020-10-26 10:43:19.793] [[32minfo[m] CSV: read 240296 rows with categorical features and 240296 rows with numerical ones.
+[2020-10-26 10:43:19.813] [[32minfo[m] Encoding features...
+[2020-10-26 10:43:24.907] [[32minfo[m] ...completed in 5.1 secs
+[2020-10-26 10:43:24.907] [[32minfo[m] Regression requested
+[2020-10-26 10:43:24.968] [[32minfo[m] C 4000 T 16000 s 8.0 w -1 boost-tpf 1 nepochs 1 L MAE, C1 0.000000
+[2020-10-26 10:43:24.968] [[32minfo[m] Partial fit initiated for 1 epoch(s)...
+[2020-10-26 10:48:19.730] [[32minfo[m] ...completed in 294.8 secs.
+[2020-10-26 10:48:20.231] [[32minfo[m] Model saved into trained_1.model
+[2020-10-26 10:48:20.311] [[32minfo[m] Start
+[2020-10-26 10:48:20.311] [[32minfo[m] Inference
+[2020-10-26 10:48:20.312] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 10:48:20.312] [[32minfo[m] CSV: reading input.csv ...
+[2020-10-26 10:48:23.346] [[32minfo[m] ...completed in 3.0 secs
+[2020-10-26 10:48:23.346] [[32minfo[m] CSV: read 454404 rows with categorical features and 454404 rows with numerical ones.
+[2020-10-26 10:48:23.391] [[32minfo[m] Encoding features...
+[2020-10-26 10:48:33.047] [[32minfo[m] ...completed in 9.7 secs
+[2020-10-26 10:48:33.578] [[32minfo[m] Regression inference
+[2020-10-26 10:48:34.097] [[32minfo[m] Predicting...
+[2020-10-26 10:48:41.631] [[32minfo[m] ...completed in 7.5 secs
+[2020-10-26 10:48:41.634] [[32minfo[m] scores 454404
+[2020-10-26 10:48:41.634] [[32minfo[m] [35] 5313,0.33206
+[2020-10-26 10:48:41.634] [[32minfo[m] [36] 5617,0.35106
+[2020-10-26 10:48:41.634] [[32minfo[m] [37] 6143,0.38394
+[2020-10-26 10:48:41.634] [[32minfo[m] [73] 7029,0.43931
+[2020-10-26 10:48:41.634] [[32minfo[m] [74] 9960,0.62250
+[2020-10-26 10:48:41.634] [[32minfo[m] [75] 8140,0.50875
+[2020-10-26 10:48:41.634] [[32minfo[m] [208] 8563,0.53519
+[2020-10-26 10:48:41.634] [[32minfo[m] [265] 2796,0.17475
+gzip: trained_0.model: No such file or directory
+Num. customers: 454404
+Average churn: 2.05
+result:  32.88172
+2
+/repo/tco-customerchurn/data /repo/tco-customerchurn/submission/code/experiments/regr9
+/repo/tco-customerchurn/submission/code/experiments/regr9
+[2020-10-26 10:48:56.966] [[32minfo[m] Start
+[2020-10-26 10:48:56.966] [[32minfo[m] Training
+[2020-10-26 10:48:56.967] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 10:48:56.967] [[32minfo[m] CSV: reading history_mix_1to1.csv ...
+[2020-10-26 10:48:58.723] [[32minfo[m] ...completed in 1.8 secs
+[2020-10-26 10:48:58.723] [[32minfo[m] CSV: read 240296 rows with categorical features and 240296 rows with numerical ones.
+[2020-10-26 10:48:58.741] [[32minfo[m] Encoding features...
+[2020-10-26 10:49:03.915] [[32minfo[m] ...completed in 5.2 secs
+[2020-10-26 10:49:04.474] [[32minfo[m] Regression requested
+[2020-10-26 10:49:05.040] [[32minfo[m] Model restored from trained_1.model
+[2020-10-26 10:49:05.042] [[32minfo[m] C 4000 T 16000 s 8.0 w -1 boost-tpf 1 nepochs 1 L MAE, C1 0.000000
+[2020-10-26 10:49:05.043] [[32minfo[m] Partial fit initiated for 1 epoch(s)...
+[2020-10-26 10:54:13.265] [[32minfo[m] ...completed in 308.2 secs.
+[2020-10-26 10:54:13.784] [[32minfo[m] Model saved into trained_2.model
+[2020-10-26 10:54:13.932] [[32minfo[m] Start
+[2020-10-26 10:54:13.932] [[32minfo[m] Inference
+[2020-10-26 10:54:13.932] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 10:54:13.932] [[32minfo[m] CSV: reading input.csv ...
+[2020-10-26 10:54:17.031] [[32minfo[m] ...completed in 3.1 secs
+[2020-10-26 10:54:17.031] [[32minfo[m] CSV: read 454404 rows with categorical features and 454404 rows with numerical ones.
+[2020-10-26 10:54:17.090] [[32minfo[m] Encoding features...
+[2020-10-26 10:54:27.281] [[32minfo[m] ...completed in 10.2 secs
+[2020-10-26 10:54:27.826] [[32minfo[m] Regression inference
+[2020-10-26 10:54:28.363] [[32minfo[m] Predicting...
+[2020-10-26 10:54:35.834] [[32minfo[m] ...completed in 7.5 secs
+[2020-10-26 10:54:35.837] [[32minfo[m] scores 454404
+[2020-10-26 10:54:35.837] [[32minfo[m] [35] 6240,0.39000
+[2020-10-26 10:54:35.837] [[32minfo[m] [36] 6971,0.43569
+[2020-10-26 10:54:35.837] [[32minfo[m] [37] 5749,0.35931
+[2020-10-26 10:54:35.837] [[32minfo[m] [73] 6782,0.42388
+[2020-10-26 10:54:35.837] [[32minfo[m] [74] 8341,0.52131
+[2020-10-26 10:54:35.837] [[32minfo[m] [75] 9699,0.60619
+[2020-10-26 10:54:35.837] [[32minfo[m] [208] 6439,0.40244
+[2020-10-26 10:54:35.837] [[32minfo[m] [265] 2623,0.16394
+Num. customers: 454404
+Average churn: 2.05
+result:  31.87097
+3
+/repo/tco-customerchurn/data /repo/tco-customerchurn/submission/code/experiments/regr9
+/repo/tco-customerchurn/submission/code/experiments/regr9
+[2020-10-26 10:54:51.647] [[32minfo[m] Start
+[2020-10-26 10:54:51.647] [[32minfo[m] Training
+[2020-10-26 10:54:51.648] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 10:54:51.648] [[32minfo[m] CSV: reading history_mix_1to1.csv ...
+[2020-10-26 10:54:53.335] [[32minfo[m] ...completed in 1.7 secs
+[2020-10-26 10:54:53.335] [[32minfo[m] CSV: read 240296 rows with categorical features and 240296 rows with numerical ones.
+[2020-10-26 10:54:53.359] [[32minfo[m] Encoding features...
+[2020-10-26 10:54:58.387] [[32minfo[m] ...completed in 5.0 secs
+[2020-10-26 10:54:58.922] [[32minfo[m] Regression requested
+[2020-10-26 10:54:59.494] [[32minfo[m] Model restored from trained_2.model
+[2020-10-26 10:54:59.495] [[32minfo[m] C 4000 T 16000 s 8.0 w -1 boost-tpf 1 nepochs 1 L MAE, C1 0.000000
+[2020-10-26 10:54:59.497] [[32minfo[m] Partial fit initiated for 1 epoch(s)...
+[2020-10-26 11:00:09.815] [[32minfo[m] ...completed in 310.3 secs.
+[2020-10-26 11:00:10.305] [[32minfo[m] Model saved into trained_3.model
+[2020-10-26 11:00:10.474] [[32minfo[m] Start
+[2020-10-26 11:00:10.474] [[32minfo[m] Inference
+[2020-10-26 11:00:10.474] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 11:00:10.474] [[32minfo[m] CSV: reading input.csv ...
+[2020-10-26 11:00:13.660] [[32minfo[m] ...completed in 3.2 secs
+[2020-10-26 11:00:13.660] [[32minfo[m] CSV: read 454404 rows with categorical features and 454404 rows with numerical ones.
+[2020-10-26 11:00:13.705] [[32minfo[m] Encoding features...
+[2020-10-26 11:00:23.807] [[32minfo[m] ...completed in 10.1 secs
+[2020-10-26 11:00:24.396] [[32minfo[m] Regression inference
+[2020-10-26 11:00:24.903] [[32minfo[m] Predicting...
+[2020-10-26 11:00:32.545] [[32minfo[m] ...completed in 7.6 secs
+[2020-10-26 11:00:32.546] [[32minfo[m] scores 454404
+[2020-10-26 11:00:32.546] [[32minfo[m] [35] 4650,0.29063
+[2020-10-26 11:00:32.546] [[32minfo[m] [36] 5991,0.37444
+[2020-10-26 11:00:32.546] [[32minfo[m] [37] 6887,0.43044
+[2020-10-26 11:00:32.546] [[32minfo[m] [73] 7557,0.47231
+[2020-10-26 11:00:32.546] [[32minfo[m] [74] 10511,0.65694
+[2020-10-26 11:00:32.546] [[32minfo[m] [75] 9383,0.58644
+[2020-10-26 11:00:32.546] [[32minfo[m] [208] 7267,0.45419
+[2020-10-26 11:00:32.546] [[32minfo[m] [265] 1993,0.12456
+Num. customers: 454404
+Average churn: 2.05
+result:  32.37634
+4
+/repo/tco-customerchurn/data /repo/tco-customerchurn/submission/code/experiments/regr9
+/repo/tco-customerchurn/submission/code/experiments/regr9
+[2020-10-26 11:00:48.290] [[32minfo[m] Start
+[2020-10-26 11:00:48.291] [[32minfo[m] Training
+[2020-10-26 11:00:48.292] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 11:00:48.292] [[32minfo[m] CSV: reading history_mix_1to1.csv ...
+[2020-10-26 11:00:50.053] [[32minfo[m] ...completed in 1.8 secs
+[2020-10-26 11:00:50.053] [[32minfo[m] CSV: read 240296 rows with categorical features and 240296 rows with numerical ones.
+[2020-10-26 11:00:50.072] [[32minfo[m] Encoding features...
+[2020-10-26 11:00:55.244] [[32minfo[m] ...completed in 5.2 secs
+[2020-10-26 11:00:55.794] [[32minfo[m] Regression requested
+[2020-10-26 11:00:56.361] [[32minfo[m] Model restored from trained_3.model
+[2020-10-26 11:00:56.362] [[32minfo[m] C 4000 T 16000 s 8.0 w -1 boost-tpf 1 nepochs 1 L MAE, C1 0.000000
+[2020-10-26 11:00:56.364] [[32minfo[m] Partial fit initiated for 1 epoch(s)...
+[2020-10-26 11:06:13.960] [[32minfo[m] ...completed in 317.6 secs.
+[2020-10-26 11:06:14.516] [[32minfo[m] Model saved into trained_4.model
+[2020-10-26 11:06:14.679] [[32minfo[m] Start
+[2020-10-26 11:06:14.679] [[32minfo[m] Inference
+[2020-10-26 11:06:14.679] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 11:06:14.679] [[32minfo[m] CSV: reading input.csv ...
+[2020-10-26 11:06:17.849] [[32minfo[m] ...completed in 3.2 secs
+[2020-10-26 11:06:17.849] [[32minfo[m] CSV: read 454404 rows with categorical features and 454404 rows with numerical ones.
+[2020-10-26 11:06:17.897] [[32minfo[m] Encoding features...
+[2020-10-26 11:06:28.058] [[32minfo[m] ...completed in 10.2 secs
+[2020-10-26 11:06:28.601] [[32minfo[m] Regression inference
+[2020-10-26 11:06:29.115] [[32minfo[m] Predicting...
+[2020-10-26 11:06:36.732] [[32minfo[m] ...completed in 7.6 secs
+[2020-10-26 11:06:36.734] [[32minfo[m] scores 454404
+[2020-10-26 11:06:36.734] [[32minfo[m] [35] 6926,0.43288
+[2020-10-26 11:06:36.734] [[32minfo[m] [36] 7206,0.45038
+[2020-10-26 11:06:36.734] [[32minfo[m] [37] 5312,0.33200
+[2020-10-26 11:06:36.734] [[32minfo[m] [73] 6224,0.38900
+[2020-10-26 11:06:36.734] [[32minfo[m] [74] 9367,0.58544
+[2020-10-26 11:06:36.734] [[32minfo[m] [75] 9336,0.58350
+[2020-10-26 11:06:36.734] [[32minfo[m] [208] 7050,0.44062
+[2020-10-26 11:06:36.734] [[32minfo[m] [265] 2399,0.14994
+Num. customers: 454404
+Average churn: 2.05
+result:  32.79570
+5
+/repo/tco-customerchurn/data /repo/tco-customerchurn/submission/code/experiments/regr9
+/repo/tco-customerchurn/submission/code/experiments/regr9
+[2020-10-26 11:06:53.296] [[32minfo[m] Start
+[2020-10-26 11:06:53.296] [[32minfo[m] Training
+[2020-10-26 11:06:53.298] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 11:06:53.298] [[32minfo[m] CSV: reading history_mix_1to1.csv ...
+[2020-10-26 11:06:55.061] [[32minfo[m] ...completed in 1.8 secs
+[2020-10-26 11:06:55.061] [[32minfo[m] CSV: read 240296 rows with categorical features and 240296 rows with numerical ones.
+[2020-10-26 11:06:55.080] [[32minfo[m] Encoding features...
+[2020-10-26 11:07:00.283] [[32minfo[m] ...completed in 5.2 secs
+[2020-10-26 11:07:00.828] [[32minfo[m] Regression requested
+[2020-10-26 11:07:01.335] [[32minfo[m] Model restored from trained_4.model
+[2020-10-26 11:07:01.336] [[32minfo[m] C 4000 T 16000 s 8.0 w -1 boost-tpf 1 nepochs 1 L MAE, C1 0.000000
+[2020-10-26 11:07:01.337] [[32minfo[m] Partial fit initiated for 1 epoch(s)...
+[2020-10-26 11:12:17.539] [[32minfo[m] ...completed in 316.2 secs.
+[2020-10-26 11:12:18.065] [[32minfo[m] Model saved into trained_5.model
+[2020-10-26 11:12:18.239] [[32minfo[m] Start
+[2020-10-26 11:12:18.239] [[32minfo[m] Inference
+[2020-10-26 11:12:18.240] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 11:12:18.240] [[32minfo[m] CSV: reading input.csv ...
+[2020-10-26 11:12:21.418] [[32minfo[m] ...completed in 3.2 secs
+[2020-10-26 11:12:21.418] [[32minfo[m] CSV: read 454404 rows with categorical features and 454404 rows with numerical ones.
+[2020-10-26 11:12:21.464] [[32minfo[m] Encoding features...
+[2020-10-26 11:12:31.140] [[32minfo[m] ...completed in 9.7 secs
+[2020-10-26 11:12:31.695] [[32minfo[m] Regression inference
+[2020-10-26 11:12:32.219] [[32minfo[m] Predicting...
+[2020-10-26 11:12:39.998] [[32minfo[m] ...completed in 7.8 secs
+[2020-10-26 11:12:40.002] [[32minfo[m] scores 454404
+[2020-10-26 11:12:40.002] [[32minfo[m] [35] 5036,0.31475
+[2020-10-26 11:12:40.002] [[32minfo[m] [36] 5460,0.34125
+[2020-10-26 11:12:40.003] [[32minfo[m] [37] 5598,0.34987
+[2020-10-26 11:12:40.003] [[32minfo[m] [73] 5399,0.33744
+[2020-10-26 11:12:40.003] [[32minfo[m] [74] 8323,0.52019
+[2020-10-26 11:12:40.003] [[32minfo[m] [75] 8030,0.50187
+[2020-10-26 11:12:40.003] [[32minfo[m] [208] 6252,0.39075
+[2020-10-26 11:12:40.003] [[32minfo[m] [265] 1841,0.11506
+Num. customers: 454404
+Average churn: 2.05
+result:  33.04301
+6
+/repo/tco-customerchurn/data /repo/tco-customerchurn/submission/code/experiments/regr9
+/repo/tco-customerchurn/submission/code/experiments/regr9
+[2020-10-26 11:12:55.734] [[32minfo[m] Start
+[2020-10-26 11:12:55.734] [[32minfo[m] Training
+[2020-10-26 11:12:55.734] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 11:12:55.734] [[32minfo[m] CSV: reading history_mix_1to1.csv ...
+[2020-10-26 11:12:57.475] [[32minfo[m] ...completed in 1.7 secs
+[2020-10-26 11:12:57.475] [[32minfo[m] CSV: read 240296 rows with categorical features and 240296 rows with numerical ones.
+[2020-10-26 11:12:57.495] [[32minfo[m] Encoding features...
+[2020-10-26 11:13:02.687] [[32minfo[m] ...completed in 5.2 secs
+[2020-10-26 11:13:03.218] [[32minfo[m] Regression requested
+[2020-10-26 11:13:03.754] [[32minfo[m] Model restored from trained_5.model
+[2020-10-26 11:13:03.755] [[32minfo[m] C 4000 T 16000 s 8.0 w -1 boost-tpf 1 nepochs 1 L MAE, C1 0.000000
+[2020-10-26 11:13:03.756] [[32minfo[m] Partial fit initiated for 1 epoch(s)...
+[2020-10-26 11:17:53.110] [[32minfo[m] ...completed in 289.4 secs.
+[2020-10-26 11:17:53.595] [[32minfo[m] Model saved into trained_6.model
+[2020-10-26 11:17:53.755] [[32minfo[m] Start
+[2020-10-26 11:17:53.755] [[32minfo[m] Inference
+[2020-10-26 11:17:53.755] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 11:17:53.755] [[32minfo[m] CSV: reading input.csv ...
+[2020-10-26 11:17:56.828] [[32minfo[m] ...completed in 3.1 secs
+[2020-10-26 11:17:56.828] [[32minfo[m] CSV: read 454404 rows with categorical features and 454404 rows with numerical ones.
+[2020-10-26 11:17:56.885] [[32minfo[m] Encoding features...
+[2020-10-26 11:18:06.605] [[32minfo[m] ...completed in 9.7 secs
+[2020-10-26 11:18:07.164] [[32minfo[m] Regression inference
+[2020-10-26 11:18:07.668] [[32minfo[m] Predicting...
+[2020-10-26 11:18:15.459] [[32minfo[m] ...completed in 7.8 secs
+[2020-10-26 11:18:15.462] [[32minfo[m] scores 454404
+[2020-10-26 11:18:15.462] [[32minfo[m] [35] 5410,0.33813
+[2020-10-26 11:18:15.462] [[32minfo[m] [36] 5836,0.36475
+[2020-10-26 11:18:15.462] [[32minfo[m] [37] 5176,0.32350
+[2020-10-26 11:18:15.462] [[32minfo[m] [73] 6322,0.39513
+[2020-10-26 11:18:15.462] [[32minfo[m] [74] 9582,0.59888
+[2020-10-26 11:18:15.462] [[32minfo[m] [75] 10403,0.65019
+[2020-10-26 11:18:15.462] [[32minfo[m] [208] 7238,0.45238
+[2020-10-26 11:18:15.462] [[32minfo[m] [265] 2766,0.17288
+Num. customers: 454404
+Average churn: 2.05
+result:  33.31183
+7
+/repo/tco-customerchurn/data /repo/tco-customerchurn/submission/code/experiments/regr9
+/repo/tco-customerchurn/submission/code/experiments/regr9
+[2020-10-26 11:18:30.936] [[32minfo[m] Start
+[2020-10-26 11:18:30.936] [[32minfo[m] Training
+[2020-10-26 11:18:31.105] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 11:18:31.105] [[32minfo[m] CSV: reading history_mix_1to1.csv ...
+[2020-10-26 11:18:32.818] [[32minfo[m] ...completed in 1.7 secs
+[2020-10-26 11:18:32.818] [[32minfo[m] CSV: read 240296 rows with categorical features and 240296 rows with numerical ones.
+[2020-10-26 11:18:32.844] [[32minfo[m] Encoding features...
+[2020-10-26 11:18:37.928] [[32minfo[m] ...completed in 5.1 secs
+[2020-10-26 11:18:38.474] [[32minfo[m] Regression requested
+[2020-10-26 11:18:38.977] [[32minfo[m] Model restored from trained_6.model
+[2020-10-26 11:18:38.978] [[32minfo[m] C 4000 T 16000 s 8.0 w -1 boost-tpf 1 nepochs 1 L MAE, C1 0.000000
+[2020-10-26 11:18:38.980] [[32minfo[m] Partial fit initiated for 1 epoch(s)...
+[2020-10-26 11:23:37.081] [[32minfo[m] ...completed in 298.1 secs.
+[2020-10-26 11:23:37.591] [[32minfo[m] Model saved into trained_7.model
+[2020-10-26 11:23:37.774] [[32minfo[m] Start
+[2020-10-26 11:23:37.774] [[32minfo[m] Inference
+[2020-10-26 11:23:37.774] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 11:23:37.774] [[32minfo[m] CSV: reading input.csv ...
+[2020-10-26 11:23:40.863] [[32minfo[m] ...completed in 3.1 secs
+[2020-10-26 11:23:40.863] [[32minfo[m] CSV: read 454404 rows with categorical features and 454404 rows with numerical ones.
+[2020-10-26 11:23:40.908] [[32minfo[m] Encoding features...
+[2020-10-26 11:23:50.698] [[32minfo[m] ...completed in 9.8 secs
+[2020-10-26 11:23:51.247] [[32minfo[m] Regression inference
+[2020-10-26 11:23:51.742] [[32minfo[m] Predicting...
+[2020-10-26 11:23:59.331] [[32minfo[m] ...completed in 7.6 secs
+[2020-10-26 11:23:59.333] [[32minfo[m] scores 454404
+[2020-10-26 11:23:59.333] [[32minfo[m] [35] 5691,0.35569
+[2020-10-26 11:23:59.333] [[32minfo[m] [36] 6841,0.42756
+[2020-10-26 11:23:59.333] [[32minfo[m] [37] 5179,0.32369
+[2020-10-26 11:23:59.333] [[32minfo[m] [73] 7264,0.45400
+[2020-10-26 11:23:59.333] [[32minfo[m] [74] 9223,0.57644
+[2020-10-26 11:23:59.333] [[32minfo[m] [75] 8816,0.55100
+[2020-10-26 11:23:59.333] [[32minfo[m] [208] 8657,0.54106
+[2020-10-26 11:23:59.333] [[32minfo[m] [265] 2709,0.16931
+Num. customers: 454404
+Average churn: 2.05
+result:  32.37634
+8
+/repo/tco-customerchurn/data /repo/tco-customerchurn/submission/code/experiments/regr9
+/repo/tco-customerchurn/submission/code/experiments/regr9
+[2020-10-26 11:24:14.522] [[32minfo[m] Start
+[2020-10-26 11:24:14.522] [[32minfo[m] Training
+[2020-10-26 11:24:14.522] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 11:24:14.523] [[32minfo[m] CSV: reading history_mix_1to1.csv ...
+[2020-10-26 11:24:16.198] [[32minfo[m] ...completed in 1.7 secs
+[2020-10-26 11:24:16.198] [[32minfo[m] CSV: read 240296 rows with categorical features and 240296 rows with numerical ones.
+[2020-10-26 11:24:16.216] [[32minfo[m] Encoding features...
+[2020-10-26 11:24:21.459] [[32minfo[m] ...completed in 5.2 secs
+[2020-10-26 11:24:21.997] [[32minfo[m] Regression requested
+[2020-10-26 11:24:22.523] [[32minfo[m] Model restored from trained_7.model
+[2020-10-26 11:24:22.524] [[32minfo[m] C 4000 T 16000 s 8.0 w -1 boost-tpf 1 nepochs 1 L MAE, C1 0.000000
+[2020-10-26 11:24:22.525] [[32minfo[m] Partial fit initiated for 1 epoch(s)...
+[2020-10-26 11:29:01.115] [[32minfo[m] ...completed in 278.6 secs.
+[2020-10-26 11:29:01.615] [[32minfo[m] Model saved into trained_8.model
+[2020-10-26 11:29:01.780] [[32minfo[m] Start
+[2020-10-26 11:29:01.781] [[32minfo[m] Inference
+[2020-10-26 11:29:01.782] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 11:29:01.782] [[32minfo[m] CSV: reading input.csv ...
+[2020-10-26 11:29:05.084] [[32minfo[m] ...completed in 3.3 secs
+[2020-10-26 11:29:05.084] [[32minfo[m] CSV: read 454404 rows with categorical features and 454404 rows with numerical ones.
+[2020-10-26 11:29:05.130] [[32minfo[m] Encoding features...
+[2020-10-26 11:29:14.956] [[32minfo[m] ...completed in 9.8 secs
+[2020-10-26 11:29:15.493] [[32minfo[m] Regression inference
+[2020-10-26 11:29:16.019] [[32minfo[m] Predicting...
+[2020-10-26 11:29:23.673] [[32minfo[m] ...completed in 7.7 secs
+[2020-10-26 11:29:23.675] [[32minfo[m] scores 454404
+[2020-10-26 11:29:23.675] [[32minfo[m] [35] 5673,0.35456
+[2020-10-26 11:29:23.675] [[32minfo[m] [36] 5450,0.34063
+[2020-10-26 11:29:23.675] [[32minfo[m] [37] 5290,0.33063
+[2020-10-26 11:29:23.675] [[32minfo[m] [73] 6662,0.41637
+[2020-10-26 11:29:23.675] [[32minfo[m] [74] 9938,0.62113
+[2020-10-26 11:29:23.675] [[32minfo[m] [75] 8492,0.53075
+[2020-10-26 11:29:23.675] [[32minfo[m] [208] 9080,0.56750
+[2020-10-26 11:29:23.675] [[32minfo[m] [265] 2789,0.17431
+Num. customers: 454404
+Average churn: 2.05
+result:  33.04301
+9
+/repo/tco-customerchurn/data /repo/tco-customerchurn/submission/code/experiments/regr9
+/repo/tco-customerchurn/submission/code/experiments/regr9
+[2020-10-26 11:29:39.248] [[32minfo[m] Start
+[2020-10-26 11:29:39.248] [[32minfo[m] Training
+[2020-10-26 11:29:39.248] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 11:29:39.248] [[32minfo[m] CSV: reading history_mix_1to1.csv ...
+[2020-10-26 11:29:41.403] [[32minfo[m] ...completed in 2.2 secs
+[2020-10-26 11:29:41.403] [[32minfo[m] CSV: read 240296 rows with categorical features and 240296 rows with numerical ones.
+[2020-10-26 11:29:41.421] [[32minfo[m] Encoding features...
+[2020-10-26 11:29:46.711] [[32minfo[m] ...completed in 5.3 secs
+[2020-10-26 11:29:47.238] [[32minfo[m] Regression requested
+[2020-10-26 11:29:47.751] [[32minfo[m] Model restored from trained_8.model
+[2020-10-26 11:29:47.752] [[32minfo[m] C 4000 T 16000 s 8.0 w -1 boost-tpf 1 nepochs 1 L MAE, C1 0.000000
+[2020-10-26 11:29:47.754] [[32minfo[m] Partial fit initiated for 1 epoch(s)...
+[2020-10-26 11:34:52.215] [[32minfo[m] ...completed in 304.5 secs.
+[2020-10-26 11:34:52.709] [[32minfo[m] Model saved into trained_9.model
+[2020-10-26 11:34:52.855] [[32minfo[m] Start
+[2020-10-26 11:34:52.855] [[32minfo[m] Inference
+[2020-10-26 11:34:52.856] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 11:34:52.857] [[32minfo[m] CSV: reading input.csv ...
+[2020-10-26 11:34:55.846] [[32minfo[m] ...completed in 3.0 secs
+[2020-10-26 11:34:55.847] [[32minfo[m] CSV: read 454404 rows with categorical features and 454404 rows with numerical ones.
+[2020-10-26 11:34:55.896] [[32minfo[m] Encoding features...
+[2020-10-26 11:35:05.654] [[32minfo[m] ...completed in 9.8 secs
+[2020-10-26 11:35:06.201] [[32minfo[m] Regression inference
+[2020-10-26 11:35:06.709] [[32minfo[m] Predicting...
+[2020-10-26 11:35:14.262] [[32minfo[m] ...completed in 7.6 secs
+[2020-10-26 11:35:14.264] [[32minfo[m] scores 454404
+[2020-10-26 11:35:14.264] [[32minfo[m] [35] 5244,0.32775
+[2020-10-26 11:35:14.264] [[32minfo[m] [36] 6745,0.42156
+[2020-10-26 11:35:14.264] [[32minfo[m] [37] 5554,0.34713
+[2020-10-26 11:35:14.264] [[32minfo[m] [73] 5781,0.36131
+[2020-10-26 11:35:14.264] [[32minfo[m] [74] 9400,0.58750
+[2020-10-26 11:35:14.264] [[32minfo[m] [75] 7090,0.44312
+[2020-10-26 11:35:14.264] [[32minfo[m] [208] 7388,0.46175
+[2020-10-26 11:35:14.264] [[32minfo[m] [265] 2599,0.16244
+Num. customers: 454404
+Average churn: 2.05
+result:  33.05376
+10
+/repo/tco-customerchurn/data /repo/tco-customerchurn/submission/code/experiments/regr9
+/repo/tco-customerchurn/submission/code/experiments/regr9
+[2020-10-26 11:35:29.934] [[32minfo[m] Start
+[2020-10-26 11:35:29.934] [[32minfo[m] Training
+[2020-10-26 11:35:29.935] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 11:35:29.935] [[32minfo[m] CSV: reading history_mix_1to1.csv ...
+[2020-10-26 11:35:31.601] [[32minfo[m] ...completed in 1.7 secs
+[2020-10-26 11:35:31.602] [[32minfo[m] CSV: read 240296 rows with categorical features and 240296 rows with numerical ones.
+[2020-10-26 11:35:31.620] [[32minfo[m] Encoding features...
+[2020-10-26 11:35:36.843] [[32minfo[m] ...completed in 5.2 secs
+[2020-10-26 11:35:37.366] [[32minfo[m] Regression requested
+[2020-10-26 11:35:37.877] [[32minfo[m] Model restored from trained_9.model
+[2020-10-26 11:35:37.878] [[32minfo[m] C 4000 T 16000 s 8.0 w -1 boost-tpf 1 nepochs 1 L MAE, C1 0.000000
+[2020-10-26 11:35:37.881] [[32minfo[m] Partial fit initiated for 1 epoch(s)...
+[2020-10-26 11:40:41.498] [[32minfo[m] ...completed in 303.6 secs.
+[2020-10-26 11:40:41.996] [[32minfo[m] Model saved into trained_10.model
+[2020-10-26 11:40:42.151] [[32minfo[m] Start
+[2020-10-26 11:40:42.151] [[32minfo[m] Inference
+[2020-10-26 11:40:42.152] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 11:40:42.152] [[32minfo[m] CSV: reading input.csv ...
+[2020-10-26 11:40:45.231] [[32minfo[m] ...completed in 3.1 secs
+[2020-10-26 11:40:45.231] [[32minfo[m] CSV: read 454404 rows with categorical features and 454404 rows with numerical ones.
+[2020-10-26 11:40:45.277] [[32minfo[m] Encoding features...
+[2020-10-26 11:40:55.591] [[32minfo[m] ...completed in 10.3 secs
+[2020-10-26 11:40:56.141] [[32minfo[m] Regression inference
+[2020-10-26 11:40:56.654] [[32minfo[m] Predicting...
+[2020-10-26 11:41:04.234] [[32minfo[m] ...completed in 7.6 secs
+[2020-10-26 11:41:04.237] [[32minfo[m] scores 454404
+[2020-10-26 11:41:04.237] [[32minfo[m] [35] 5006,0.31288
+[2020-10-26 11:41:04.237] [[32minfo[m] [36] 5701,0.35631
+[2020-10-26 11:41:04.237] [[32minfo[m] [37] 6917,0.43231
+[2020-10-26 11:41:04.237] [[32minfo[m] [73] 7868,0.49175
+[2020-10-26 11:41:04.237] [[32minfo[m] [74] 8903,0.55644
+[2020-10-26 11:41:04.237] [[32minfo[m] [75] 8990,0.56188
+[2020-10-26 11:41:04.237] [[32minfo[m] [208] 7585,0.47406
+[2020-10-26 11:41:04.237] [[32minfo[m] [265] 3021,0.18881
+Num. customers: 454404
+Average churn: 2.05
+result:  32.72043
+11
+/repo/tco-customerchurn/data /repo/tco-customerchurn/submission/code/experiments/regr9
+/repo/tco-customerchurn/submission/code/experiments/regr9
+[2020-10-26 11:41:19.458] [[32minfo[m] Start
+[2020-10-26 11:41:19.458] [[32minfo[m] Training
+[2020-10-26 11:41:19.459] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 11:41:19.459] [[32minfo[m] CSV: reading history_mix_1to1.csv ...
+[2020-10-26 11:41:21.109] [[32minfo[m] ...completed in 1.6 secs
+[2020-10-26 11:41:21.109] [[32minfo[m] CSV: read 240296 rows with categorical features and 240296 rows with numerical ones.
+[2020-10-26 11:41:21.128] [[32minfo[m] Encoding features...
+[2020-10-26 11:41:26.324] [[32minfo[m] ...completed in 5.2 secs
+[2020-10-26 11:41:26.856] [[32minfo[m] Regression requested
+[2020-10-26 11:41:27.379] [[32minfo[m] Model restored from trained_10.model
+[2020-10-26 11:41:27.380] [[32minfo[m] C 4000 T 16000 s 8.0 w -1 boost-tpf 1 nepochs 1 L MAE, C1 0.000000
+[2020-10-26 11:41:27.381] [[32minfo[m] Partial fit initiated for 1 epoch(s)...
+[2020-10-26 11:46:35.429] [[32minfo[m] ...completed in 308.0 secs.
+[2020-10-26 11:46:35.923] [[32minfo[m] Model saved into trained_11.model
+[2020-10-26 11:46:36.071] [[32minfo[m] Start
+[2020-10-26 11:46:36.071] [[32minfo[m] Inference
+[2020-10-26 11:46:36.072] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 11:46:36.072] [[32minfo[m] CSV: reading input.csv ...
+[2020-10-26 11:46:39.304] [[32minfo[m] ...completed in 3.2 secs
+[2020-10-26 11:46:39.304] [[32minfo[m] CSV: read 454404 rows with categorical features and 454404 rows with numerical ones.
+[2020-10-26 11:46:39.351] [[32minfo[m] Encoding features...
+[2020-10-26 11:46:49.144] [[32minfo[m] ...completed in 9.8 secs
+[2020-10-26 11:46:49.712] [[32minfo[m] Regression inference
+[2020-10-26 11:46:50.232] [[32minfo[m] Predicting...
+[2020-10-26 11:46:57.774] [[32minfo[m] ...completed in 7.5 secs
+[2020-10-26 11:46:57.776] [[32minfo[m] scores 454404
+[2020-10-26 11:46:57.776] [[32minfo[m] [35] 4428,0.27675
+[2020-10-26 11:46:57.776] [[32minfo[m] [36] 6530,0.40813
+[2020-10-26 11:46:57.776] [[32minfo[m] [37] 5055,0.31594
+[2020-10-26 11:46:57.776] [[32minfo[m] [73] 5999,0.37494
+[2020-10-26 11:46:57.776] [[32minfo[m] [74] 8901,0.55631
+[2020-10-26 11:46:57.776] [[32minfo[m] [75] 7777,0.48606
+[2020-10-26 11:46:57.776] [[32minfo[m] [208] 8325,0.52031
+[2020-10-26 11:46:57.776] [[32minfo[m] [265] 2778,0.17363
+Num. customers: 454404
+Average churn: 2.05
+result:  33.30108
+12
+/repo/tco-customerchurn/data /repo/tco-customerchurn/submission/code/experiments/regr9
+/repo/tco-customerchurn/submission/code/experiments/regr9
+[2020-10-26 11:47:13.020] [[32minfo[m] Start
+[2020-10-26 11:47:13.020] [[32minfo[m] Training
+[2020-10-26 11:47:13.274] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 11:47:13.274] [[32minfo[m] CSV: reading history_mix_1to1.csv ...
+[2020-10-26 11:47:14.988] [[32minfo[m] ...completed in 1.7 secs
+[2020-10-26 11:47:14.988] [[32minfo[m] CSV: read 240296 rows with categorical features and 240296 rows with numerical ones.
+[2020-10-26 11:47:15.005] [[32minfo[m] Encoding features...
+[2020-10-26 11:47:20.273] [[32minfo[m] ...completed in 5.3 secs
+[2020-10-26 11:47:20.853] [[32minfo[m] Regression requested
+[2020-10-26 11:47:21.435] [[32minfo[m] Model restored from trained_11.model
+[2020-10-26 11:47:21.436] [[32minfo[m] C 4000 T 16000 s 8.0 w -1 boost-tpf 1 nepochs 1 L MAE, C1 0.000000
+[2020-10-26 11:47:21.438] [[32minfo[m] Partial fit initiated for 1 epoch(s)...
+[2020-10-26 11:52:12.914] [[32minfo[m] ...completed in 291.5 secs.
+[2020-10-26 11:52:13.431] [[32minfo[m] Model saved into trained_12.model
+[2020-10-26 11:52:13.593] [[32minfo[m] Start
+[2020-10-26 11:52:13.593] [[32minfo[m] Inference
+[2020-10-26 11:52:13.593] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 11:52:13.593] [[32minfo[m] CSV: reading input.csv ...
+[2020-10-26 11:52:16.690] [[32minfo[m] ...completed in 3.1 secs
+[2020-10-26 11:52:16.690] [[32minfo[m] CSV: read 454404 rows with categorical features and 454404 rows with numerical ones.
+[2020-10-26 11:52:16.735] [[32minfo[m] Encoding features...
+[2020-10-26 11:52:26.798] [[32minfo[m] ...completed in 10.1 secs
+[2020-10-26 11:52:27.335] [[32minfo[m] Regression inference
+[2020-10-26 11:52:27.843] [[32minfo[m] Predicting...
+[2020-10-26 11:52:35.555] [[32minfo[m] ...completed in 7.7 secs
+[2020-10-26 11:52:35.557] [[32minfo[m] scores 454404
+[2020-10-26 11:52:35.557] [[32minfo[m] [35] 5865,0.36656
+[2020-10-26 11:52:35.557] [[32minfo[m] [36] 7231,0.45194
+[2020-10-26 11:52:35.557] [[32minfo[m] [37] 5479,0.34244
+[2020-10-26 11:52:35.557] [[32minfo[m] [73] 6823,0.42644
+[2020-10-26 11:52:35.557] [[32minfo[m] [74] 8880,0.55500
+[2020-10-26 11:52:35.557] [[32minfo[m] [75] 9320,0.58250
+[2020-10-26 11:52:35.557] [[32minfo[m] [208] 9698,0.60613
+[2020-10-26 11:52:35.557] [[32minfo[m] [265] 3540,0.22125
+Num. customers: 454404
+Average churn: 2.05
+result:  32.51613
+13
+/repo/tco-customerchurn/data /repo/tco-customerchurn/submission/code/experiments/regr9
+/repo/tco-customerchurn/submission/code/experiments/regr9
+[2020-10-26 11:52:51.174] [[32minfo[m] Start
+[2020-10-26 11:52:51.175] [[32minfo[m] Training
+[2020-10-26 11:52:51.175] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 11:52:51.175] [[32minfo[m] CSV: reading history_mix_1to1.csv ...
+[2020-10-26 11:52:52.893] [[32minfo[m] ...completed in 1.7 secs
+[2020-10-26 11:52:52.893] [[32minfo[m] CSV: read 240296 rows with categorical features and 240296 rows with numerical ones.
+[2020-10-26 11:52:52.912] [[32minfo[m] Encoding features...
+[2020-10-26 11:52:58.069] [[32minfo[m] ...completed in 5.2 secs
+[2020-10-26 11:52:58.626] [[32minfo[m] Regression requested
+[2020-10-26 11:52:59.177] [[32minfo[m] Model restored from trained_12.model
+[2020-10-26 11:52:59.179] [[32minfo[m] C 4000 T 16000 s 8.0 w -1 boost-tpf 1 nepochs 1 L MAE, C1 0.000000
+[2020-10-26 11:52:59.181] [[32minfo[m] Partial fit initiated for 1 epoch(s)...
+[2020-10-26 11:58:15.874] [[32minfo[m] ...completed in 316.7 secs.
+[2020-10-26 11:58:16.436] [[32minfo[m] Model saved into trained_13.model
+[2020-10-26 11:58:16.604] [[32minfo[m] Start
+[2020-10-26 11:58:16.604] [[32minfo[m] Inference
+[2020-10-26 11:58:16.605] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 11:58:16.605] [[32minfo[m] CSV: reading input.csv ...
+[2020-10-26 11:58:19.635] [[32minfo[m] ...completed in 3.0 secs
+[2020-10-26 11:58:19.635] [[32minfo[m] CSV: read 454404 rows with categorical features and 454404 rows with numerical ones.
+[2020-10-26 11:58:19.682] [[32minfo[m] Encoding features...
+[2020-10-26 11:58:29.886] [[32minfo[m] ...completed in 10.2 secs
+[2020-10-26 11:58:30.420] [[32minfo[m] Regression inference
+[2020-10-26 11:58:30.916] [[32minfo[m] Predicting...
+[2020-10-26 11:58:38.659] [[32minfo[m] ...completed in 7.7 secs
+[2020-10-26 11:58:38.662] [[32minfo[m] scores 454404
+[2020-10-26 11:58:38.662] [[32minfo[m] [35] 4432,0.27700
+[2020-10-26 11:58:38.662] [[32minfo[m] [36] 5378,0.33613
+[2020-10-26 11:58:38.662] [[32minfo[m] [37] 5865,0.36656
+[2020-10-26 11:58:38.662] [[32minfo[m] [73] 6515,0.40719
+[2020-10-26 11:58:38.662] [[32minfo[m] [74] 9274,0.57962
+[2020-10-26 11:58:38.662] [[32minfo[m] [75] 7774,0.48588
+[2020-10-26 11:58:38.662] [[32minfo[m] [208] 6531,0.40819
+[2020-10-26 11:58:38.662] [[32minfo[m] [265] 2230,0.13937
+Num. customers: 454404
+Average churn: 2.05
+result:  33.09677
+14
+/repo/tco-customerchurn/data /repo/tco-customerchurn/submission/code/experiments/regr9
+/repo/tco-customerchurn/submission/code/experiments/regr9
+[2020-10-26 11:58:55.290] [[32minfo[m] Start
+[2020-10-26 11:58:55.290] [[32minfo[m] Training
+[2020-10-26 11:58:55.291] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 11:58:55.291] [[32minfo[m] CSV: reading history_mix_1to1.csv ...
+[2020-10-26 11:58:57.010] [[32minfo[m] ...completed in 1.7 secs
+[2020-10-26 11:58:57.010] [[32minfo[m] CSV: read 240296 rows with categorical features and 240296 rows with numerical ones.
+[2020-10-26 11:58:57.029] [[32minfo[m] Encoding features...
+[2020-10-26 11:59:02.245] [[32minfo[m] ...completed in 5.2 secs
+[2020-10-26 11:59:02.777] [[32minfo[m] Regression requested
+[2020-10-26 11:59:03.317] [[32minfo[m] Model restored from trained_13.model
+[2020-10-26 11:59:03.319] [[32minfo[m] C 4000 T 16000 s 8.0 w -1 boost-tpf 1 nepochs 1 L MAE, C1 0.000000
+[2020-10-26 11:59:03.320] [[32minfo[m] Partial fit initiated for 1 epoch(s)...
+[2020-10-26 12:04:02.626] [[32minfo[m] ...completed in 299.3 secs.
+[2020-10-26 12:04:03.116] [[32minfo[m] Model saved into trained_14.model
+[2020-10-26 12:04:03.276] [[32minfo[m] Start
+[2020-10-26 12:04:03.276] [[32minfo[m] Inference
+[2020-10-26 12:04:03.277] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 12:04:03.277] [[32minfo[m] CSV: reading input.csv ...
+[2020-10-26 12:04:06.319] [[32minfo[m] ...completed in 3.0 secs
+[2020-10-26 12:04:06.319] [[32minfo[m] CSV: read 454404 rows with categorical features and 454404 rows with numerical ones.
+[2020-10-26 12:04:06.372] [[32minfo[m] Encoding features...
+[2020-10-26 12:04:16.216] [[32minfo[m] ...completed in 9.8 secs
+[2020-10-26 12:04:16.760] [[32minfo[m] Regression inference
+[2020-10-26 12:04:17.271] [[32minfo[m] Predicting...
+[2020-10-26 12:04:25.513] [[32minfo[m] ...completed in 8.2 secs
+[2020-10-26 12:04:25.515] [[32minfo[m] scores 454404
+[2020-10-26 12:04:25.517] [[32minfo[m] [35] 5884,0.36775
+[2020-10-26 12:04:25.518] [[32minfo[m] [36] 7005,0.43781
+[2020-10-26 12:04:25.518] [[32minfo[m] [37] 5896,0.36850
+[2020-10-26 12:04:25.518] [[32minfo[m] [73] 6618,0.41363
+[2020-10-26 12:04:25.518] [[32minfo[m] [74] 9789,0.61181
+[2020-10-26 12:04:25.519] [[32minfo[m] [75] 8715,0.54469
+[2020-10-26 12:04:25.519] [[32minfo[m] [208] 7028,0.43925
+[2020-10-26 12:04:25.519] [[32minfo[m] [265] 3178,0.19862
+Num. customers: 454404
+Average churn: 2.05
+result:  32.73118
+15
+/repo/tco-customerchurn/data /repo/tco-customerchurn/submission/code/experiments/regr9
+/repo/tco-customerchurn/submission/code/experiments/regr9
+[2020-10-26 12:04:41.146] [[32minfo[m] Start
+[2020-10-26 12:04:41.146] [[32minfo[m] Training
+[2020-10-26 12:04:41.148] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 12:04:41.148] [[32minfo[m] CSV: reading history_mix_1to1.csv ...
+[2020-10-26 12:04:42.797] [[32minfo[m] ...completed in 1.6 secs
+[2020-10-26 12:04:42.797] [[32minfo[m] CSV: read 240296 rows with categorical features and 240296 rows with numerical ones.
+[2020-10-26 12:04:42.818] [[32minfo[m] Encoding features...
+[2020-10-26 12:04:47.980] [[32minfo[m] ...completed in 5.2 secs
+[2020-10-26 12:04:48.524] [[32minfo[m] Regression requested
+[2020-10-26 12:04:49.039] [[32minfo[m] Model restored from trained_14.model
+[2020-10-26 12:04:49.041] [[32minfo[m] C 4000 T 16000 s 8.0 w -1 boost-tpf 1 nepochs 1 L MAE, C1 0.000000
+[2020-10-26 12:04:49.042] [[32minfo[m] Partial fit initiated for 1 epoch(s)...
+[2020-10-26 12:10:15.621] [[32minfo[m] ...completed in 326.6 secs.
+[2020-10-26 12:10:16.144] [[32minfo[m] Model saved into trained_15.model
+[2020-10-26 12:10:16.299] [[32minfo[m] Start
+[2020-10-26 12:10:16.299] [[32minfo[m] Inference
+[2020-10-26 12:10:16.300] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 12:10:16.300] [[32minfo[m] CSV: reading input.csv ...
+[2020-10-26 12:10:19.351] [[32minfo[m] ...completed in 3.1 secs
+[2020-10-26 12:10:19.351] [[32minfo[m] CSV: read 454404 rows with categorical features and 454404 rows with numerical ones.
+[2020-10-26 12:10:19.398] [[32minfo[m] Encoding features...
+[2020-10-26 12:10:29.490] [[32minfo[m] ...completed in 10.1 secs
+[2020-10-26 12:10:30.108] [[32minfo[m] Regression inference
+[2020-10-26 12:10:30.628] [[32minfo[m] Predicting...
+[2020-10-26 12:10:38.233] [[32minfo[m] ...completed in 7.6 secs
+[2020-10-26 12:10:38.236] [[32minfo[m] scores 454404
+[2020-10-26 12:10:38.236] [[32minfo[m] [35] 5127,0.32044
+[2020-10-26 12:10:38.236] [[32minfo[m] [36] 6279,0.39244
+[2020-10-26 12:10:38.236] [[32minfo[m] [37] 5525,0.34531
+[2020-10-26 12:10:38.236] [[32minfo[m] [73] 7217,0.45106
+[2020-10-26 12:10:38.236] [[32minfo[m] [74] 9825,0.61406
+[2020-10-26 12:10:38.236] [[32minfo[m] [75] 8097,0.50606
+[2020-10-26 12:10:38.236] [[32minfo[m] [208] 7060,0.44125
+[2020-10-26 12:10:38.236] [[32minfo[m] [265] 2372,0.14825
+Num. customers: 454404
+Average churn: 2.05
+result:  33.40860
+16
+/repo/tco-customerchurn/data /repo/tco-customerchurn/submission/code/experiments/regr9
+/repo/tco-customerchurn/submission/code/experiments/regr9
+[2020-10-26 12:10:54.904] [[32minfo[m] Start
+[2020-10-26 12:10:54.906] [[32minfo[m] Training
+[2020-10-26 12:10:54.909] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 12:10:54.909] [[32minfo[m] CSV: reading history_mix_1to1.csv ...
+[2020-10-26 12:10:56.684] [[32minfo[m] ...completed in 1.8 secs
+[2020-10-26 12:10:56.684] [[32minfo[m] CSV: read 240296 rows with categorical features and 240296 rows with numerical ones.
+[2020-10-26 12:10:56.703] [[32minfo[m] Encoding features...
+[2020-10-26 12:11:01.949] [[32minfo[m] ...completed in 5.2 secs
+[2020-10-26 12:11:02.488] [[32minfo[m] Regression requested
+[2020-10-26 12:11:03.018] [[32minfo[m] Model restored from trained_15.model
+[2020-10-26 12:11:03.020] [[32minfo[m] C 4000 T 16000 s 8.0 w -1 boost-tpf 1 nepochs 1 L MAE, C1 0.000000
+[2020-10-26 12:11:03.022] [[32minfo[m] Partial fit initiated for 1 epoch(s)...
+[2020-10-26 12:16:10.409] [[32minfo[m] ...completed in 307.4 secs.
+[2020-10-26 12:16:10.909] [[32minfo[m] Model saved into trained_16.model
+[2020-10-26 12:16:11.065] [[32minfo[m] Start
+[2020-10-26 12:16:11.065] [[32minfo[m] Inference
+[2020-10-26 12:16:11.066] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 12:16:11.067] [[32minfo[m] CSV: reading input.csv ...
+[2020-10-26 12:16:14.260] [[32minfo[m] ...completed in 3.2 secs
+[2020-10-26 12:16:14.260] [[32minfo[m] CSV: read 454404 rows with categorical features and 454404 rows with numerical ones.
+[2020-10-26 12:16:14.313] [[32minfo[m] Encoding features...
+[2020-10-26 12:16:24.590] [[32minfo[m] ...completed in 10.3 secs
+[2020-10-26 12:16:25.135] [[32minfo[m] Regression inference
+[2020-10-26 12:16:25.654] [[32minfo[m] Predicting...
+[2020-10-26 12:16:33.509] [[32minfo[m] ...completed in 7.9 secs
+[2020-10-26 12:16:33.511] [[32minfo[m] scores 454404
+[2020-10-26 12:16:33.511] [[32minfo[m] [35] 5678,0.35487
+[2020-10-26 12:16:33.511] [[32minfo[m] [36] 5880,0.36750
+[2020-10-26 12:16:33.511] [[32minfo[m] [37] 6337,0.39606
+[2020-10-26 12:16:33.511] [[32minfo[m] [73] 7604,0.47525
+[2020-10-26 12:16:33.511] [[32minfo[m] [74] 10302,0.64387
+[2020-10-26 12:16:33.511] [[32minfo[m] [75] 9600,0.60000
+[2020-10-26 12:16:33.511] [[32minfo[m] [208] 7214,0.45088
+[2020-10-26 12:16:33.511] [[32minfo[m] [265] 2133,0.13331
+Num. customers: 454404
+Average churn: 2.05
+result:  32.78495
+17
+/repo/tco-customerchurn/data /repo/tco-customerchurn/submission/code/experiments/regr9
+/repo/tco-customerchurn/submission/code/experiments/regr9
+[2020-10-26 12:16:49.487] [[32minfo[m] Start
+[2020-10-26 12:16:49.487] [[32minfo[m] Training
+[2020-10-26 12:16:49.488] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 12:16:49.489] [[32minfo[m] CSV: reading history_mix_1to1.csv ...
+[2020-10-26 12:16:51.176] [[32minfo[m] ...completed in 1.7 secs
+[2020-10-26 12:16:51.176] [[32minfo[m] CSV: read 240296 rows with categorical features and 240296 rows with numerical ones.
+[2020-10-26 12:16:51.195] [[32minfo[m] Encoding features...
+[2020-10-26 12:16:56.310] [[32minfo[m] ...completed in 5.1 secs
+[2020-10-26 12:16:56.837] [[32minfo[m] Regression requested
+[2020-10-26 12:16:57.346] [[32minfo[m] Model restored from trained_16.model
+[2020-10-26 12:16:57.347] [[32minfo[m] C 4000 T 16000 s 8.0 w -1 boost-tpf 1 nepochs 1 L MAE, C1 0.000000
+[2020-10-26 12:16:57.349] [[32minfo[m] Partial fit initiated for 1 epoch(s)...
+[2020-10-26 12:21:45.420] [[32minfo[m] ...completed in 288.1 secs.
+[2020-10-26 12:21:45.912] [[32minfo[m] Model saved into trained_17.model
+[2020-10-26 12:21:46.066] [[32minfo[m] Start
+[2020-10-26 12:21:46.066] [[32minfo[m] Inference
+[2020-10-26 12:21:46.067] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 12:21:46.067] [[32minfo[m] CSV: reading input.csv ...
+[2020-10-26 12:21:49.130] [[32minfo[m] ...completed in 3.1 secs
+[2020-10-26 12:21:49.130] [[32minfo[m] CSV: read 454404 rows with categorical features and 454404 rows with numerical ones.
+[2020-10-26 12:21:49.177] [[32minfo[m] Encoding features...
+[2020-10-26 12:21:58.979] [[32minfo[m] ...completed in 9.8 secs
+[2020-10-26 12:21:59.572] [[32minfo[m] Regression inference
+[2020-10-26 12:22:00.071] [[32minfo[m] Predicting...
+[2020-10-26 12:22:07.731] [[32minfo[m] ...completed in 7.7 secs
+[2020-10-26 12:22:07.733] [[32minfo[m] scores 454404
+[2020-10-26 12:22:07.733] [[32minfo[m] [35] 5029,0.31431
+[2020-10-26 12:22:07.733] [[32minfo[m] [36] 6230,0.38938
+[2020-10-26 12:22:07.733] [[32minfo[m] [37] 5143,0.32144
+[2020-10-26 12:22:07.733] [[32minfo[m] [73] 7145,0.44656
+[2020-10-26 12:22:07.733] [[32minfo[m] [74] 9951,0.62194
+[2020-10-26 12:22:07.733] [[32minfo[m] [75] 8578,0.53612
+[2020-10-26 12:22:07.733] [[32minfo[m] [208] 8762,0.54763
+[2020-10-26 12:22:07.733] [[32minfo[m] [265] 2661,0.16631
+Num. customers: 454404
+Average churn: 2.05
+result:  32.27957
+18
+/repo/tco-customerchurn/data /repo/tco-customerchurn/submission/code/experiments/regr9
+/repo/tco-customerchurn/submission/code/experiments/regr9
+[2020-10-26 12:22:23.351] [[32minfo[m] Start
+[2020-10-26 12:22:23.351] [[32minfo[m] Training
+[2020-10-26 12:22:23.353] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 12:22:23.354] [[32minfo[m] CSV: reading history_mix_1to1.csv ...
+[2020-10-26 12:22:25.117] [[32minfo[m] ...completed in 1.8 secs
+[2020-10-26 12:22:25.117] [[32minfo[m] CSV: read 240296 rows with categorical features and 240296 rows with numerical ones.
+[2020-10-26 12:22:25.136] [[32minfo[m] Encoding features...
+[2020-10-26 12:22:30.385] [[32minfo[m] ...completed in 5.2 secs
+[2020-10-26 12:22:30.953] [[32minfo[m] Regression requested
+[2020-10-26 12:22:31.493] [[32minfo[m] Model restored from trained_17.model
+[2020-10-26 12:22:31.494] [[32minfo[m] C 4000 T 16000 s 8.0 w -1 boost-tpf 1 nepochs 1 L MAE, C1 0.000000
+[2020-10-26 12:22:31.496] [[32minfo[m] Partial fit initiated for 1 epoch(s)...
+[2020-10-26 12:27:43.439] [[32minfo[m] ...completed in 311.9 secs.
+[2020-10-26 12:27:43.925] [[32minfo[m] Model saved into trained_18.model
+[2020-10-26 12:27:44.067] [[32minfo[m] Start
+[2020-10-26 12:27:44.067] [[32minfo[m] Inference
+[2020-10-26 12:27:44.069] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 12:27:44.069] [[32minfo[m] CSV: reading input.csv ...
+[2020-10-26 12:27:47.291] [[32minfo[m] ...completed in 3.2 secs
+[2020-10-26 12:27:47.291] [[32minfo[m] CSV: read 454404 rows with categorical features and 454404 rows with numerical ones.
+[2020-10-26 12:27:47.338] [[32minfo[m] Encoding features...
+[2020-10-26 12:27:57.475] [[32minfo[m] ...completed in 10.1 secs
+[2020-10-26 12:27:58.042] [[32minfo[m] Regression inference
+[2020-10-26 12:27:58.572] [[32minfo[m] Predicting...
+[2020-10-26 12:28:06.127] [[32minfo[m] ...completed in 7.6 secs
+[2020-10-26 12:28:06.129] [[32minfo[m] scores 454404
+[2020-10-26 12:28:06.129] [[32minfo[m] [35] 5707,0.35669
+[2020-10-26 12:28:06.129] [[32minfo[m] [36] 6190,0.38688
+[2020-10-26 12:28:06.129] [[32minfo[m] [37] 5115,0.31969
+[2020-10-26 12:28:06.129] [[32minfo[m] [73] 6830,0.42688
+[2020-10-26 12:28:06.129] [[32minfo[m] [74] 9054,0.56588
+[2020-10-26 12:28:06.129] [[32minfo[m] [75] 7028,0.43925
+[2020-10-26 12:28:06.129] [[32minfo[m] [208] 7051,0.44069
+[2020-10-26 12:28:06.129] [[32minfo[m] [265] 2055,0.12844
+Num. customers: 454404
+Average churn: 2.05
+result:  33.29032
+19
+/repo/tco-customerchurn/data /repo/tco-customerchurn/submission/code/experiments/regr9
+/repo/tco-customerchurn/submission/code/experiments/regr9
+[2020-10-26 12:28:22.559] [[32minfo[m] Start
+[2020-10-26 12:28:22.559] [[32minfo[m] Training
+[2020-10-26 12:28:22.560] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 12:28:22.560] [[32minfo[m] CSV: reading history_mix_1to1.csv ...
+[2020-10-26 12:28:24.293] [[32minfo[m] ...completed in 1.7 secs
+[2020-10-26 12:28:24.293] [[32minfo[m] CSV: read 240296 rows with categorical features and 240296 rows with numerical ones.
+[2020-10-26 12:28:24.312] [[32minfo[m] Encoding features...
+[2020-10-26 12:28:29.619] [[32minfo[m] ...completed in 5.3 secs
+[2020-10-26 12:28:30.191] [[32minfo[m] Regression requested
+[2020-10-26 12:28:30.713] [[32minfo[m] Model restored from trained_18.model
+[2020-10-26 12:28:30.714] [[32minfo[m] C 4000 T 16000 s 8.0 w -1 boost-tpf 1 nepochs 1 L MAE, C1 0.000000
+[2020-10-26 12:28:30.716] [[32minfo[m] Partial fit initiated for 1 epoch(s)...
+[2020-10-26 12:33:48.365] [[32minfo[m] ...completed in 317.6 secs.
+[2020-10-26 12:33:48.909] [[32minfo[m] Model saved into trained_19.model
+[2020-10-26 12:33:49.078] [[32minfo[m] Start
+[2020-10-26 12:33:49.078] [[32minfo[m] Inference
+[2020-10-26 12:33:49.079] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 12:33:49.079] [[32minfo[m] CSV: reading input.csv ...
+[2020-10-26 12:33:52.241] [[32minfo[m] ...completed in 3.2 secs
+[2020-10-26 12:33:52.241] [[32minfo[m] CSV: read 454404 rows with categorical features and 454404 rows with numerical ones.
+[2020-10-26 12:33:52.296] [[32minfo[m] Encoding features...
+[2020-10-26 12:34:02.284] [[32minfo[m] ...completed in 10.0 secs
+[2020-10-26 12:34:02.836] [[32minfo[m] Regression inference
+[2020-10-26 12:34:03.339] [[32minfo[m] Predicting...
+[2020-10-26 12:34:11.051] [[32minfo[m] ...completed in 7.7 secs
+[2020-10-26 12:34:11.054] [[32minfo[m] scores 454404
+[2020-10-26 12:34:11.054] [[32minfo[m] [35] 4551,0.28444
+[2020-10-26 12:34:11.054] [[32minfo[m] [36] 5428,0.33925
+[2020-10-26 12:34:11.054] [[32minfo[m] [37] 6656,0.41600
+[2020-10-26 12:34:11.054] [[32minfo[m] [73] 8115,0.50719
+[2020-10-26 12:34:11.054] [[32minfo[m] [74] 9717,0.60731
+[2020-10-26 12:34:11.054] [[32minfo[m] [75] 7643,0.47769
+[2020-10-26 12:34:11.054] [[32minfo[m] [208] 7130,0.44562
+[2020-10-26 12:34:11.054] [[32minfo[m] [265] 3160,0.19750
+Num. customers: 454404
+Average churn: 2.05
+result:  32.89247
+20
+/repo/tco-customerchurn/data /repo/tco-customerchurn/submission/code/experiments/regr9
+/repo/tco-customerchurn/submission/code/experiments/regr9
+[2020-10-26 12:34:26.731] [[32minfo[m] Start
+[2020-10-26 12:34:26.731] [[32minfo[m] Training
+[2020-10-26 12:34:26.733] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 12:34:26.733] [[32minfo[m] CSV: reading history_mix_1to1.csv ...
+[2020-10-26 12:34:28.376] [[32minfo[m] ...completed in 1.6 secs
+[2020-10-26 12:34:28.376] [[32minfo[m] CSV: read 240296 rows with categorical features and 240296 rows with numerical ones.
+[2020-10-26 12:34:28.394] [[32minfo[m] Encoding features...
+[2020-10-26 12:34:33.513] [[32minfo[m] ...completed in 5.1 secs
+[2020-10-26 12:34:34.061] [[32minfo[m] Regression requested
+[2020-10-26 12:34:34.609] [[32minfo[m] Model restored from trained_19.model
+[2020-10-26 12:34:34.610] [[32minfo[m] C 4000 T 16000 s 8.0 w -1 boost-tpf 1 nepochs 1 L MAE, C1 0.000000
+[2020-10-26 12:34:34.612] [[32minfo[m] Partial fit initiated for 1 epoch(s)...
+[2020-10-26 12:39:52.087] [[32minfo[m] ...completed in 317.5 secs.
+[2020-10-26 12:39:52.619] [[32minfo[m] Model saved into trained_20.model
+[2020-10-26 12:39:52.778] [[32minfo[m] Start
+[2020-10-26 12:39:52.778] [[32minfo[m] Inference
+[2020-10-26 12:39:52.778] [[32minfo[m] JSON: read encodings from encoding-32.json
+[2020-10-26 12:39:52.778] [[32minfo[m] CSV: reading input.csv ...
+[2020-10-26 12:39:56.055] [[32minfo[m] ...completed in 3.3 secs
+[2020-10-26 12:39:56.055] [[32minfo[m] CSV: read 454404 rows with categorical features and 454404 rows with numerical ones.
+[2020-10-26 12:39:56.100] [[32minfo[m] Encoding features...
+[2020-10-26 12:40:06.287] [[32minfo[m] ...completed in 10.2 secs
+[2020-10-26 12:40:06.834] [[32minfo[m] Regression inference
+[2020-10-26 12:40:07.342] [[32minfo[m] Predicting...
+[2020-10-26 12:40:15.348] [[32minfo[m] ...completed in 8.0 secs
+[2020-10-26 12:40:15.350] [[32minfo[m] scores 454404
+[2020-10-26 12:40:15.350] [[32minfo[m] [35] 4951,0.30944
+[2020-10-26 12:40:15.350] [[32minfo[m] [36] 7157,0.44731
+[2020-10-26 12:40:15.350] [[32minfo[m] [37] 6371,0.39819
+[2020-10-26 12:40:15.350] [[32minfo[m] [73] 6216,0.38850
+[2020-10-26 12:40:15.350] [[32minfo[m] [74] 8709,0.54431
+[2020-10-26 12:40:15.350] [[32minfo[m] [75] 8674,0.54212
+[2020-10-26 12:40:15.350] [[32minfo[m] [208] 8438,0.52738
+[2020-10-26 12:40:15.350] [[32minfo[m] [265] 2382,0.14888
+Num. customers: 454404
+Average churn: 2.05
+result:  31.93548

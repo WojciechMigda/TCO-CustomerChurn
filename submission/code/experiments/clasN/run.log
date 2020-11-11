@@ -1,0 +1,40 @@
+1
+/repo/tco-customerchurn/data /repo/tco-customerchurn/submission/code/experiments/clasN
+/repo/tco-customerchurn/submission/code/experiments/clasN
+[2020-11-08 17:21:59.890] [[32minfo[m] Start
+[2020-11-08 17:21:59.890] [[32minfo[m] Training
+[2020-11-08 17:21:59.892] [[32minfo[m] JSON: read encodings from encoding-100.json
+[2020-11-08 17:21:59.892] [[32minfo[m] CSV: reading history_mix_1to3.csv ...
+[2020-11-08 17:22:03.439] [[32minfo[m] ...completed in 3.5 secs
+[2020-11-08 17:22:03.439] [[32minfo[m] CSV: read 480592 rows with categorical features and 480592 rows with numerical ones.
+[2020-11-08 17:22:03.482] [[32minfo[m] Encoding features...
+[2020-11-08 17:22:19.160] [[32minfo[m] ...completed in 15.7 secs
+[2020-11-08 17:22:19.160] [[32minfo[m] Classification requested
+[2020-11-08 17:22:19.160] [[32minfo[m] C 4000 T 16000 s 20.0 w -1 boost-tpf 1 nepochs 1 f201906 seasonal
+[2020-11-08 17:22:19.161] [[32minfo[m] Partial fit initiated for 1 epoch(s)...
+[2020-11-08 18:01:46.550] [[32minfo[m] ...completed in 2367.4 secs.
+[2020-11-08 18:01:51.966] [[32minfo[m] Model saved into trained_1.model
+[2020-11-08 18:01:52.148] [[32minfo[m] Start
+[2020-11-08 18:01:52.148] [[32minfo[m] Inference
+[2020-11-08 18:01:52.149] [[32minfo[m] JSON: read encodings from encoding-100.json
+[2020-11-08 18:01:52.149] [[32minfo[m] CSV: reading input.csv ...
+[2020-11-08 18:01:55.312] [[32minfo[m] ...completed in 3.2 secs
+[2020-11-08 18:01:55.312] [[32minfo[m] CSV: read 454404 rows with categorical features and 454404 rows with numerical ones.
+[2020-11-08 18:01:55.370] [[32minfo[m] Encoding features...
+[2020-11-08 18:02:10.400] [[32minfo[m] ...completed in 15.0 secs
+[2020-11-08 18:02:15.083] [[32minfo[m] Classification inference
+[2020-11-08 18:02:19.794] [[32minfo[m] Predicting...
+[2020-11-08 18:03:03.243] [[32minfo[m] ...completed in 43.4 secs
+[2020-11-08 18:03:03.263] [[32minfo[m] scores 454404
+[2020-11-08 18:03:03.263] [[32minfo[m] [35] 13525,-10137,0.13028
+[2020-11-08 18:03:03.263] [[32minfo[m] [36] 7229,-9784,0.23417
+[2020-11-08 18:03:03.263] [[32minfo[m] [37] 11458,-9796,0.16791
+[2020-11-08 18:03:03.263] [[32minfo[m] [73] 10030,-10880,0.17328
+[2020-11-08 18:03:03.263] [[32minfo[m] [74] 5402,-5437,0.33064
+[2020-11-08 18:03:03.263] [[32minfo[m] [75] 9389,-9398,0.20645
+[2020-11-08 18:03:03.263] [[32minfo[m] [208] 9721,-8269,0.21891
+[2020-11-08 18:03:03.263] [[32minfo[m] [265] 9960,-9409,0.19736
+gzip: trained_0.model: No such file or directory
+Num. customers: 454404
+Average churn: 2.05
+result:  35.21505
