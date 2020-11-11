@@ -35,7 +35,7 @@ ${EXE} train \
   -c \
   -d ${OUT_DIR}/history_mix_1to${RATIO}.csv \
   -e encoding-${ENC}.json \
-  -o ${OUT_DIR}/${SAVED_MODEL} \
-  -C 40 -T 16000 -s 20 -w -1 -j 8 --nepochs 1 \
+  -o models/${SAVED_MODEL} \
+  -C 4000 -T 16000 -s 20 -w -1 -j 8 --nepochs 1 \
   --f201906 \
   #
